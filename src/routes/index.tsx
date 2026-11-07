@@ -5,7 +5,6 @@ import { ImportJourney } from "@/components/site/ImportJourney";
 import { HomeHero } from "@/components/site/home/HomeHero";
 import { LatestArrivals } from "@/components/site/home/LatestArrivals";
 import { MarketsOverview } from "@/components/site/home/MarketsOverview";
-import { FeaturedVehicle } from "@/components/site/home/FeaturedVehicle";
 import { PricingExplainer } from "@/components/site/home/PricingExplainer";
 import { HomeClosing } from "@/components/site/home/HomeClosing";
 import { SectionHead } from "@/components/site/home/SectionHead";
@@ -27,7 +26,6 @@ function HomePage() {
       <BrandMarquee />
       <LatestArrivals />
       <MarketsOverview />
-      <FeaturedVehicle />
       {/* JOURNEY */}
       <section className="container-site py-20">
         <SectionHead eyebrow="من كوريا إليك" title="رحلة الاستيراد بخمس مراحل" action={<Link to="/cars/korea">سيارات كوريا</Link>} />

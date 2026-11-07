@@ -1,57 +1,119 @@
 import { Link } from "@tanstack/react-router";
-import { Building2, Gavel, Car, ShieldCheck, Coins, Globe2 } from "lucide-react";
-import heroImg from "@/assets/hero-atmosphere.jpg";
+import { ArrowLeft } from "lucide-react";
+import { VEHICLES } from "@/data/vehicles";
+import { latestArrivals } from "@/lib/inventory";
+import { primarySpecs } from "@/lib/vehicle-specs";
+import type { Vehicle } from "@/lib/types";
 import { Button } from "@/components/ui/button";
+import { VehicleImage } from "@/components/site/VehicleImage";
+import { SpecStrip } from "@/components/site/SpecStrip";
+import { PriceTag } from "@/components/site/PriceTag";
+import { DemoBadge, MarketBadge, StatusBadge } from "@/components/site/badges";
+
+/** Featured vehicle shown on the hero stage (was the standalone FeaturedVehicle section). */
+const FEATURED_REF = "KR-01003";
+
+const FACTS = [
+  { t: "ثلاثة أسواق", d: "كوريا للاستيراد، والسعودية واليمن معارض محلية." },
+  { t: "عملة موحدة SAR", d: "كل الأسعار المعروضة بالريال السعودي." },
+  { t: "شفافية في البيانات", d: "لا نعرض سعراً أو فحصاً غير مؤكد." },
+];
 
 export function HomeHero() {
+  const featured = VEHICLES.find((v) => v.referenceCode === FEATURED_REF) ?? latestArrivals(VEHICLES, 6)[0];
   return (
-      <section className="relative isolate flex min-h-[min(92svh,60rem)] items-end overflow-hidden pb-14 pt-28 md:items-center md:pb-20">
-        <img src={heroImg} alt="" width={1920} height={1088} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
-        <div className="scrim-hero absolute inset-0 -z-10" aria-hidden />
-        <div className="container-site">
-          <div className="max-w-2xl">
-            <p className="eyebrow reveal-up">AL-JALES AUTOMOTIVE · كوريا · السعودية · اليمن</p>
-            <h1 className="reveal-up mt-5 text-4xl font-bold leading-[1.15] [animation-delay:120ms] md:text-6xl">
-              سيارتك القادمة،
-              <br />
-              من المصدر إلى بابك.
-            </h1>
-            <p className="reveal-up mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground [animation-delay:220ms]">
-              نختار السيارات من السوق الكوري ونعرضها مع سيارات معرضي السعودية واليمن، بأسعار واضحة بالريال السعودي.
-            </p>
-            <div className="reveal-up mt-8 flex flex-wrap gap-3 [animation-delay:320ms]">
-              <Button asChild variant="hero" size="xl">
-                <Link to="/korea/showrooms">
-                  <Building2 /> المعارض الكورية
-                </Link>
-              </Button>
-              <Button asChild variant="ink" size="xl">
-                <Link to="/korea/auctions">
-                  <Gavel /> المزادات
-                </Link>
-              </Button>
-              <Button asChild variant="surface" size="xl">
-                <Link to="/our-showrooms">
-                  <Car /> سياراتنا
-                </Link>
-              </Button>
+    <section aria-labelledby="hero-title" className="relative isolate overflow-hidden pt-14 md:pt-16">
+      {/* THE CUT — desktop stage panel with a slanted inner edge and a thin red edge line */}
+      <div aria-hidden className="cut-reveal pointer-events-none absolute inset-y-0 end-0 -z-10 hidden w-[46%] lg:block">
+        <div className="cut-slant absolute inset-0 bg-primary" />
+        <div className="cut-slant absolute inset-y-0 start-[6px] end-0 bg-surface-stage" />
+      </div>
+
+      <div className="container-site grid gap-y-10 pt-8 md:pt-12 lg:min-h-[min(86svh,50rem)] lg:grid-cols-12 lg:items-center lg:gap-x-8 lg:py-16">
+        <div className="lg:col-span-7 lg:pe-10">
+          <p className="eyebrow reveal-up">AL-JALES AUTOMOTIVE · كوريا · السعودية · اليمن</p>
+          <h1 id="hero-title" className="mt-4 text-display-xl font-bold">
+            <span className="reveal-up block [animation-delay:90ms]">سيارتك القادمة،</span>
+            <span className="reveal-up block [animation-delay:200ms]">من المصدر إلى بابك.</span>
+          </h1>
+          <p className="reveal-up mt-5 max-w-xl text-base leading-relaxed text-muted-foreground [animation-delay:300ms] md:text-lg">
+            نختار السيارات من السوق الكوري ونعرضها مع سيارات معرضي السعودية واليمن، بأسعار واضحة بالريال السعودي.
+          </p>
+          <div className="reveal-up mt-7 flex flex-wrap items-center gap-x-6 gap-y-4 [animation-delay:400ms]">
+            <Button asChild variant="hero" size="xl" className="transition-[background-color,transform] active:scale-[0.98]">
+              <Link to="/cars">
+                تصفح السيارات <ArrowLeft />
+              </Link>
+            </Button>
+            <Link
+              to="/korea/showrooms"
+              className="group inline-flex items-center gap-1.5 font-display text-sm font-semibold text-foreground underline-offset-[6px] hover:underline"
+            >
+              المعارض الكورية والمزادات
+              <ArrowLeft className="size-4 text-accent-text transition-transform group-hover:-translate-x-1" aria-hidden />
+            </Link>
+          </div>
+          <dl className="reveal-up mt-10 hidden max-w-xl grid-cols-3 gap-6 border-t pt-6 [animation-delay:500ms] sm:grid">
+            {FACTS.map((f) => (
+              <div key={f.t}>
+                <dt className="font-display text-sm font-semibold">{f.t}</dt>
+                <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">{f.d}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        {featured && <HeroStage v={featured} />}
+      </div>
+    </section>
+  );
+}
+
+function HeroStage({ v }: { v: Vehicle }) {
+  const title = `${v.brandAr} ${v.modelAr}`;
+  const facts = primarySpecs(v).filter((s) => s.key === "mileage" || s.key === "fuel" || s.key === "transmission");
+  return (
+    <div className="relative -mx-5 px-5 pb-12 pt-14 md:-mx-8 md:px-8 md:pt-20 lg:col-span-5 lg:mx-0 lg:px-0 lg:py-0">
+      {/* Mobile/tablet: the same cut becomes a diagonal top edge */}
+      <div aria-hidden className="absolute inset-0 -z-10 lg:hidden">
+        <div className="cut-edge-top absolute inset-0 bg-primary" />
+        <div className="cut-edge-top absolute inset-x-0 bottom-0 top-[5px] bg-surface-stage" />
+      </div>
+
+      <figure className="@container relative">
+        <span aria-hidden className="stage-code fade-soft absolute inset-x-0 top-[8%] text-center [animation-delay:500ms]">
+          {v.referenceCode}
+        </span>
+        <div className="stage-in relative mx-auto aspect-[16/10] max-w-xl">
+          <VehicleImage image={v.gallery[0]} eager fit="contain" className="bg-transparent" sizes="(min-width: 1024px) 40vw, 100vw" />
+        </div>
+
+        <figcaption className="reveal-up relative mx-auto mt-2 max-w-xl rounded-lg bg-card p-5 shadow-lift [animation-delay:550ms]">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="eyebrow">سيارة مختارة</p>
+            <div className="flex flex-wrap items-center gap-1.5">
+              <MarketBadge market={v.market} />
+              <StatusBadge status={v.status} />
+              {v.isDemo && <DemoBadge />}
             </div>
           </div>
-
-          <ul className="reveal-up mt-12 grid max-w-3xl grid-cols-1 gap-3 [animation-delay:420ms] sm:grid-cols-3">
-            {[
-              { icon: Globe2, t: "ثلاثة أسواق", d: "كوريا للاستيراد، والسعودية واليمن معارض محلية." },
-              { icon: Coins, t: "عملة موحدة SAR", d: "كل الأسعار المعروضة بالريال السعودي." },
-              { icon: ShieldCheck, t: "شفافية في البيانات", d: "لا نعرض سعراً أو فحصاً غير مؤكد." },
-            ].map((c) => (
-              <li key={c.t} className="notch bg-card/90 p-4 shadow-card backdrop-blur">
-                <c.icon className="mb-2 size-5 text-accent-text" aria-hidden />
-                <p className="font-display text-sm font-semibold">{c.t}</p>
-                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{c.d}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+          <p className="mt-3 font-display text-xl font-bold md:text-2xl">
+            {title} <span className="ltr-iso text-muted-foreground">{v.year}</span>
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            <span className="ltr-iso">{v.brandEn} {v.modelEn}</span> · الرقم المرجعي <span className="ltr-iso font-mono">{v.referenceCode}</span>
+          </p>
+          <SpecStrip items={facts} variant="plain" className="mt-4" />
+          <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
+            <PriceTag vehicle={v} size="md" showNote={false} />
+            <Button asChild variant="surface" className="transition-[background-color,transform] active:scale-[0.98]">
+              <Link to="/car/$slug" params={{ slug: v.slug }}>
+                تفاصيل السيارة <ArrowLeft />
+              </Link>
+            </Button>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
   );
 }
