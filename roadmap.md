@@ -4,3 +4,7 @@
 - [ ] Real vehicle photos — waiting on the user's uploads
 - [ ] Real contact details (phone, WhatsApp, email, branch addresses/hours) — waiting on the user
 - [ ] Real inventory, Korean partner names, auction records, customer reviews — waiting on the user
+
+## Redesign "THE CUT"
+- [x] Phase A: tokens/utility, VehicleImage hardening, homepage section split (no visual change)
+- [ ] Phase B+ — waiting for user review of Phase A

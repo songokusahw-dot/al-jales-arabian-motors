@@ -61,12 +61,20 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  --color-surface-stage: var(--surface-stage);
+  --text-display-xl: clamp(2.5rem, 1.6rem + 4vw, 5.5rem);
+  --text-display-xl--line-height: 1.12;
+
   --shadow-card: var(--shadow-card-value);
   --shadow-lift: var(--shadow-lift-value);
 }
 
 :root {
   --radius: 0.5rem;
+  /* THE CUT — brand diagonal. Use selectively (hero, markets, key transitions). */
+  --cut-angle: 12deg;
+  --cut-depth: 3rem;
+  --surface-stage: oklch(0.906 0.004 255); /* vehicle stage, = accent */
   --background: oklch(0.937 0.003 264.5); /* canvas #E9EAEC */
   --foreground: oklch(0.187 0.006 271.1); /* ink #121316 */
   --card: oklch(1 0 0);
@@ -126,6 +134,7 @@
   --muted: oklch(0.336 0.011 264.4); /* #34373D */
   --muted-foreground: oklch(0.768 0.014 258.4); /* #AEB4BD */
   --accent: oklch(0.336 0.011 264.4);
+  --surface-stage: oklch(0.233 0.008 270);
   --accent-foreground: oklch(0.973 0.002 247.8);
   --accent-text: oklch(0.692 0.163 25.7); /* #F06D65 */
   --destructive: oklch(0.692 0.163 25.7);
@@ -247,5 +256,25 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* THE CUT — diagonal bottom edge; mirrors in RTL. Falls back to a straight edge. */
+@utility cut-edge {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cut-depth)), 0 100%);
+  &:where([dir="rtl"], [dir="rtl"] *) {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - var(--cut-depth)));
+  }
+  @supports not (clip-path: polygon(0 0, 1px 0, 0 1px)) {
+    clip-path: none;
+  }
+}
+@utility cut-edge-top {
+  clip-path: polygon(0 var(--cut-depth), 100% 0, 100% 100%, 0 100%);
+  &:where([dir="rtl"], [dir="rtl"] *) {
+    clip-path: polygon(0 0, 100% var(--cut-depth), 100% 100%, 0 100%);
+  }
+  @supports not (clip-path: polygon(0 0, 1px 0, 0 1px)) {
+    clip-path: none;
   }
 }
