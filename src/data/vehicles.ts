@@ -87,7 +87,7 @@ function build(s: Seed): Vehicle {
     isDemo: true,
     gallery: placeholderGallery(),
     features: s.features ?? [],
-    inspection: s.inspection,
+    ...(s.inspection ? { inspection: s.inspection } : {}),
     pricing: isKR
       ? {
           saleCurrency: "SAR",

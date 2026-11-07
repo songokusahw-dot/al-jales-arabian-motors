@@ -163,10 +163,10 @@ function Lightbox({ images, index, onIndex, title }: { images: Img[]; index: num
           if (e.key === "ArrowLeft") next();
           if (e.key === "ArrowRight") prev();
         }}
-        onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+        onTouchStart={(e) => (touchX.current = e.touches[0]?.clientX ?? null)}
         onTouchEnd={(e) => {
           if (touchX.current === null) return;
-          const dx = e.changedTouches[0].clientX - touchX.current;
+          const dx = (e.changedTouches[0]?.clientX ?? touchX.current) - touchX.current;
           if (Math.abs(dx) > 40) (dx > 0 ? next : prev)();
           touchX.current = null;
         }}

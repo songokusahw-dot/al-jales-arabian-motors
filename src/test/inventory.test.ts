@@ -45,15 +45,15 @@ describe("inventory rules", () => {
   it("latest arrivals sort by createdAt descending, not by year", () => {
     const latest = latestArrivals(VEHICLES, 18);
     for (let i = 1; i < latest.length; i++) {
-      expect(Date.parse(latest[i - 1].createdAt)).toBeGreaterThanOrEqual(Date.parse(latest[i].createdAt));
+      expect(Date.parse(latest[i - 1]!.createdAt)).toBeGreaterThanOrEqual(Date.parse(latest[i]!.createdAt));
     }
-    expect(latest[0].referenceCode).toBe("SA-01006");
+    expect(latest[0]!.referenceCode).toBe("SA-01006");
   });
 
   it("sold and reserved vehicles cannot be booked", () => {
-    expect(canBook({ ...VEHICLES[0], status: "sold" })).toBe(false);
-    expect(canBook({ ...VEHICLES[0], status: "reserved" })).toBe(false);
-    expect(canBook({ ...VEHICLES[0], status: "available" })).toBe(true);
+    expect(canBook({ ...VEHICLES[0]!, status: "sold" })).toBe(false);
+    expect(canBook({ ...VEHICLES[0]!, status: "reserved" })).toBe(false);
+    expect(canBook({ ...VEHICLES[0]!, status: "available" })).toBe(true);
   });
 
   it("totalPages is the number of pages, not the number of cars", () => {
@@ -77,7 +77,7 @@ describe("inventory rules", () => {
 
   it("price sort puts the cheapest first", () => {
     const sorted = sortVehicles(VEHICLES, "price-asc");
-    expect(sorted[0].referenceCode).toBe("YE-01003");
+    expect(sorted[0]!.referenceCode).toBe("YE-01003");
   });
 
   it("parses and drops invalid search params", () => {
