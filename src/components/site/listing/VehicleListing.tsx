@@ -34,9 +34,9 @@ const MILEAGE_STEPS = [10000, 25000, 50000, 75000, 100000];
 export type ListingProps = {
   search: ListingSearch;
   onSearchChange: (next: ListingSearch) => void;
-  fixed?: Fixed;
+  fixed?: Fixed | undefined;
   /** Show the search box prominently (used by /search). */
-  autoFocusSearch?: boolean;
+  autoFocusSearch?: boolean | undefined;
 };
 
 export function VehicleListing({ search, onSearchChange, fixed = {}, autoFocusSearch }: ListingProps) {
@@ -184,7 +184,7 @@ export function VehicleListing({ search, onSearchChange, fixed = {}, autoFocusSe
   );
 }
 
-function SearchBox({ value, onCommit, autoFocus }: { value: string; onCommit: (q: string) => void; autoFocus?: boolean }) {
+function SearchBox({ value, onCommit, autoFocus }: { value: string; onCommit: (q: string) => void; autoFocus?: boolean | undefined }) {
   const [draft, setDraft] = useState(value);
   useEffect(() => setDraft(value), [value]);
   useEffect(() => {

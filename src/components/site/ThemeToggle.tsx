@@ -7,7 +7,7 @@ export const THEME_KEY = "aljales-theme";
 /** Runs in <head> before paint so the stored theme applies without a flash. */
 export const themeInitScript = `(function(){try{var t=localStorage.getItem("${THEME_KEY}");if(t==="dark"){document.documentElement.classList.add("dark")}}catch(e){}})();`;
 
-export function ThemeToggle({ className }: { className?: string }) {
+export function ThemeToggle({ className }: { className?: string | undefined }) {
   const [dark, setDark] = useState(false);
 
   useEffect(() => {

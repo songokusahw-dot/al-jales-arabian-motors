@@ -7,9 +7,9 @@ export type BodyType = "suv" | "sedan" | "pickup" | "van";
 export type VehicleImage = {
   src: string | null;
   altAr: string;
-  sourceName?: string;
-  sourceUrl?: string;
-  licenseNote?: string;
+  sourceName?: string | undefined;
+  sourceUrl?: string | undefined;
+  licenseNote?: string | undefined;
   isPlaceholder: boolean;
 };
 
@@ -23,10 +23,10 @@ export type PriceBreakdownItem = {
 export type VehiclePricing = {
   saleCurrency: "SAR";
   /** Internal source price for Korean vehicles. Never shown as a customer price. */
-  sourcePriceKRW?: number | null;
+  sourcePriceKRW?: number | null | undefined;
   items: PriceBreakdownItem[];
   isDemo: boolean;
-  noteAr?: string;
+  noteAr?: string | undefined;
 };
 
 export type InspectionStatus = "ok" | "note" | "damage" | "not_inspected" | "unknown";
@@ -34,7 +34,7 @@ export type InspectionStatus = "ok" | "note" | "damage" | "not_inspected" | "unk
 export type InspectionFinding = {
   area: string;
   status: InspectionStatus;
-  noteAr?: string;
+  noteAr?: string | undefined;
 };
 
 export type FeatureCategory = "interior" | "tech" | "safety";
@@ -54,29 +54,29 @@ export type Vehicle = {
   mileageKm: number | null;
   fuelType: FuelType | null;
   transmission: Transmission | null;
-  bodyType?: BodyType | null;
-  engineCapacityCc?: number | null;
-  horsepower?: number | null;
-  drivetrain?: string | null;
-  exteriorColor?: string | null;
-  interiorColor?: string | null;
-  seats?: number | null;
-  doors?: number | null;
+  bodyType?: BodyType | null | undefined;
+  engineCapacityCc?: number | null | undefined;
+  horsepower?: number | null | undefined;
+  drivetrain?: string | null | undefined;
+  exteriorColor?: string | null | undefined;
+  interiorColor?: string | null | undefined;
+  seats?: number | null | undefined;
+  doors?: number | null | undefined;
   status: VehicleStatus;
   isDemo: boolean;
   gallery: VehicleImage[];
   /** Keys into FEATURE_CATALOG */
   features: string[];
   inspection?: {
-    reportAvailable: boolean;
+    reportAvailable: boolean | undefined;
     isDemo: boolean;
-    inspectionDate?: string | null;
-    sourceName?: string | null;
+    inspectionDate?: string | null | undefined;
+    sourceName?: string | null | undefined;
     findings: InspectionFinding[];
-    reportDocumentUrl?: string | null;
+    reportDocumentUrl?: string | null | undefined;
   };
   pricing: VehiclePricing;
-  sourceName?: string | null;
+  sourceName?: string | null | undefined;
 };
 
 export type Brand = {

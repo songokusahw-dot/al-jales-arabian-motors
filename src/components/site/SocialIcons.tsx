@@ -12,7 +12,7 @@ const ICONS: Record<Key, { label: string; path: string }> = {
 };
 
 /** Renders only platforms with a real configured URL. Returns null when none are set. */
-export function SocialIcons({ className }: { className?: string }) {
+export function SocialIcons({ className }: { className?: string | undefined }) {
   const entries = (Object.keys(ICONS) as Key[]).filter((k) => !!siteConfig.social[k]);
   if (!entries.length) return null;
   return (

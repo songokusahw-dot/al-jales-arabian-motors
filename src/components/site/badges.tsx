@@ -5,7 +5,7 @@ import type { MarketCode, VehicleStatus } from "@/lib/types";
 import { MARKETS } from "@/data/markets";
 import { cn } from "@/lib/utils";
 
-export function DemoBadge({ className, label = "Demo" }: { className?: string; label?: string }) {
+export function DemoBadge({ className, label = "Demo" }: { className?: string | undefined; label?: string | undefined }) {
   return (
     <Badge variant="demo" className={cn("ltr-iso", className)} title="بيانات تجريبية">
       {label}
@@ -15,7 +15,7 @@ export function DemoBadge({ className, label = "Demo" }: { className?: string; l
 
 const STATUS_ICON = { available: CheckCircle2, reserved: Clock3, sold: Ban } as const;
 
-export function StatusBadge({ status, className }: { status: VehicleStatus; className?: string }) {
+export function StatusBadge({ status, className }: { status: VehicleStatus; className?: string | undefined }) {
   const Icon = STATUS_ICON[status];
   return (
     <Badge variant={status} className={cn("gap-1", className)}>
@@ -25,7 +25,7 @@ export function StatusBadge({ status, className }: { status: VehicleStatus; clas
   );
 }
 
-export function MarketBadge({ market, className }: { market: MarketCode; className?: string }) {
+export function MarketBadge({ market, className }: { market: MarketCode; className?: string | undefined }) {
   return (
     <Badge variant="market" className={cn("gap-1.5", className)}>
       <span className="ltr-iso text-[0.65rem] opacity-80">{market}</span>

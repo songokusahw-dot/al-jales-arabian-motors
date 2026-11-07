@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/request-car")({
-  validateSearch: (raw: Record<string, unknown>): { car?: string } => (typeof raw.car === "string" && raw.car ? { car: raw.car.slice(0, 20) } : {}),
+  validateSearch: (raw: Record<string, unknown>): { car?: string | undefined } => (typeof raw["car"] === "string" && raw["car"] ? { car: raw["car"].slice(0, 20) } : {}),
   head: () => pageHead("اطلب سيارة", "لم تجد سيارتك؟ أخبرنا بالسوق والعلامة والموديل والميزانية وسنبحث لك في كوريا والسعودية واليمن."),
   component: Page,
 });

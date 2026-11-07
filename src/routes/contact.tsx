@@ -22,12 +22,12 @@ function Page() {
   const { phone, email } = siteConfig.contact;
   const wa = whatsappLink("مرحباً، لدي استفسار.");
   const [f, setF] = useState({ name: "", phone: "", email: "", message: "" });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<"name" | "phone" | "email" | "message", string>>>({});
   const [done, setDone] = useState(false);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const er: Record<string, string> = {};
+    const er: Partial<Record<"name" | "phone" | "email" | "message", string>> = {};
     if (f.name.trim().length < 2) er.name = "اكتب اسمك";
     if (!f.phone.trim() && !f.email.trim()) er.phone = "أدخل رقم هاتف أو بريداً إلكترونياً";
     if (f.phone.trim() && !isValidPhone(f.phone)) er.phone = "صيغة الهاتف غير صحيحة";
@@ -38,7 +38,7 @@ function Page() {
     saveLocal("aljales-demo-contact", { ...f, at: new Date().toISOString() });
     setDone(true);
   };
-  const inv = (k: string, id: string) => ({ "aria-invalid": !!errors[k], "aria-describedby": errors[k] ? `${id}-error` : undefined });
+  const inv = (k: "name" | "phone" | "email" | "message", id: string) => ({ "aria-invalid": !!errors[k], "aria-describedby": errors[k] ? `${id}-error` : undefined });
 
   const channels = [
     phone && { icon: Phone, label: "الهاتف", value: phone, href: `tel:${phone}` },

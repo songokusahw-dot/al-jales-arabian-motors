@@ -9,11 +9,11 @@ export function PageHeader({
   crumbs = [],
   children,
 }: {
-  eyebrow?: string;
+  eyebrow?: string | undefined;
   title: string;
-  description?: ReactNode;
-  crumbs?: { label: string }[];
-  children?: ReactNode;
+  description?: ReactNode | undefined;
+  crumbs?: { label: string | undefined }[];
+  children?: ReactNode | undefined;
 }) {
   return (
     <section className="border-b bg-card/60 pb-10 pt-28 md:pb-14 md:pt-36">

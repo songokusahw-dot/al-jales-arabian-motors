@@ -1,6 +1,6 @@
 const SITE = "الجالس للسيارات";
 
-export function pageHead(title: string, description: string, extra: { noindex?: boolean } = {}) {
+export function pageHead(title: string, description: string, extra: { noindex?: boolean | undefined } = {}) {
   const full = `${title} | ${SITE}`;
   return {
     meta: [

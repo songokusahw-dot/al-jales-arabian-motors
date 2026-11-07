@@ -3,7 +3,7 @@ import { useId } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function Field({ label, children, hint, error, id }: { label: string; children: (id: string) => ReactNode; hint?: string; error?: string; id?: string }) {
+export function Field({ label, children, hint, error, id }: { label: string; children: (id: string) => ReactNode; hint?: string | undefined; error?: string | undefined; id?: string | undefined }) {
   const auto = useId();
   const fid = id ?? auto;
   return (

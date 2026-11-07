@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/ask-question")({
-  validateSearch: (raw: Record<string, unknown>): { car?: string } => (typeof raw.car === "string" && raw.car ? { car: raw.car.slice(0, 20) } : {}),
+  validateSearch: (raw: Record<string, unknown>): { car?: string | undefined } => (typeof raw["car"] === "string" && raw["car"] ? { car: raw["car"].slice(0, 20) } : {}),
   head: () => pageHead("اطرح سؤالاً", "اسأل فريق الجالس للسيارات عن سيارة أو سعر أو عملية الاستيراد من كوريا."),
   component: Page,
 });
@@ -21,12 +21,12 @@ const CATEGORIES = ["سؤال عن سيارة", "الأسعار والتكالي
 function Page() {
   const { car } = Route.useSearch();
   const [f, setF] = useState({ name: "", contact: "", category: car ? CATEGORIES[0] : "", text: car ? `أستفسر عن السيارة ${car}: ` : "" });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<"name" | "contact" | "category" | "text", string>>>({});
   const [done, setDone] = useState(false);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const er: Record<string, string> = {};
+    const er: Partial<Record<"name" | "contact" | "category" | "text", string>> = {};
     if (f.name.trim().length < 2) er.name = "اكتب اسمك";
     if (f.contact.trim() && !isValidEmail(f.contact) && !isValidPhone(f.contact)) er.contact = "أدخل بريداً أو رقم هاتف صحيحاً";
     if (!f.category) er.category = "اختر تصنيف السؤال";
@@ -37,7 +37,7 @@ function Page() {
     setDone(true);
   };
 
-  const inv = (k: string, id: string) => ({ "aria-invalid": !!errors[k], "aria-describedby": errors[k] ? `${id}-error` : undefined });
+  const inv = (k: "name" | "contact" | "category" | "text", id: string) => ({ "aria-invalid": !!errors[k], "aria-describedby": errors[k] ? `${id}-error` : undefined });
 
   return (
     <>

@@ -10,9 +10,9 @@ export function VehicleImage({
   compact = false,
 }: {
   image: Img | undefined;
-  className?: string;
-  eager?: boolean;
-  compact?: boolean;
+  className?: string | undefined;
+  eager?: boolean | undefined;
+  compact?: boolean | undefined;
 }) {
   if (image?.src && !image.isPlaceholder) {
     return (

@@ -280,7 +280,7 @@ function HomePage() {
   );
 }
 
-function SectionHead({ eyebrow, title, action }: { eyebrow: string; title: string; action?: React.ReactNode }) {
+function SectionHead({ eyebrow, title, action }: { eyebrow: string; title: string; action?: React.ReactNode | undefined }) {
   return (
     <div className="flex flex-wrap items-end justify-between gap-4">
       <div>

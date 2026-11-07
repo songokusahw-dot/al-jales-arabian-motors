@@ -25,14 +25,14 @@ const VERIFIED_REVIEWS: Review[] = [];
 function Page() {
   const [local, setLocal] = useState<Review[]>([]);
   const [f, setF] = useState({ name: "", stars: 0, text: "", car: "" });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<"name" | "stars" | "text", string>>>({});
   const [saved, setSaved] = useState(false);
 
   useEffect(() => setLocal(readLocal<Review>(KEY)), []);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const er: Record<string, string> = {};
+    const er: Partial<Record<"name" | "stars" | "text", string>> = {};
     if (f.name.trim().length < 2) er.name = "اكتب اسمك";
     if (f.stars < 1) er.stars = "اختر عدد النجوم";
     if (f.text.trim().length < 10) er.text = "اكتب تقييمك (10 أحرف على الأقل)";

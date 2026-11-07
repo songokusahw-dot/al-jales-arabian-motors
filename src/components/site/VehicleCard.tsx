@@ -7,7 +7,7 @@ import { VehicleImage } from "./VehicleImage";
 import { DemoBadge, MarketBadge, StatusBadge } from "./badges";
 import { cn } from "@/lib/utils";
 
-export function VehicleCard({ vehicle, className }: { vehicle: Vehicle; className?: string }) {
+export function VehicleCard({ vehicle, className }: { vehicle: Vehicle; className?: string | undefined }) {
   const { totalSAR, complete } = computeTotal(vehicle.pricing);
   const sold = vehicle.status === "sold";
   return (

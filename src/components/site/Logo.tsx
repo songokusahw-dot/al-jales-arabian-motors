@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-export function Logo({ inverted = false }: { inverted?: boolean }) {
+export function Logo({ inverted = false }: { inverted?: boolean | undefined }) {
   return (
     <Link to="/" className="group flex items-center gap-2.5" aria-label="الجالس للسيارات — الرئيسية">
       <span aria-hidden className="notch flex size-9 items-center justify-center bg-primary font-display text-lg font-bold text-primary-foreground">

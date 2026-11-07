@@ -92,7 +92,7 @@ export function Gallery({ images, title }: { images: Img[]; title: string }) {
   );
 }
 
-function Frame({ children, onOpen, label, className }: { children: React.ReactNode; onOpen: () => void; label: string; className?: string }) {
+function Frame({ children, onOpen, label, className }: { children: React.ReactNode; onOpen: () => void; label: string; className?: string | undefined }) {
   return (
     <div className={cn("group relative overflow-hidden rounded-lg bg-muted", className)}>
       {children}

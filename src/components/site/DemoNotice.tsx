@@ -2,7 +2,7 @@ import { Info } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-export function DemoNotice({ children, className }: { children: ReactNode; className?: string }) {
+export function DemoNotice({ children, className }: { children: ReactNode; className?: string | undefined }) {
   return (
     <div
       role="note"

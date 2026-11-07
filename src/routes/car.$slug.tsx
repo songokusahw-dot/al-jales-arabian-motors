@@ -167,7 +167,7 @@ function StatusLine({ v }: { v: Vehicle }) {
   return <p className="flex items-center gap-2 text-sm font-medium text-success"><Check className="size-4" aria-hidden /> السيارة متاحة للاستفسار والحجز.</p>;
 }
 
-function Ctas({ v, compact = false }: { v: Vehicle; compact?: boolean }) {
+function Ctas({ v, compact = false }: { v: Vehicle; compact?: boolean | undefined }) {
   const message = `مرحباً، أستفسر عن ${v.brandEn} ${v.modelEn} ${v.year ?? ""} — ${v.referenceCode}`;
   const wa = whatsappLink(message);
   return (

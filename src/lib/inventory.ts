@@ -49,22 +49,22 @@ function oneOf<T extends string>(v: unknown, list: readonly T[]): T | undefined 
 /** Search-param validator shared by every listing route. All keys optional. */
 export function parseListingSearch(raw: Record<string, unknown>): ListingSearch {
   const out: ListingSearch = {
-    q: str(raw.q),
-    market: oneOf(raw.market, MARKETS),
-    brand: str(raw.brand),
-    model: str(raw.model),
-    yearFrom: int(raw.yearFrom),
-    yearTo: int(raw.yearTo),
-    priceMin: int(raw.priceMin),
-    priceMax: int(raw.priceMax),
-    mileageMin: int(raw.mileageMin),
-    mileageMax: int(raw.mileageMax),
-    fuel: oneOf(raw.fuel, FUELS),
-    transmission: oneOf(raw.transmission, TRANS),
-    body: oneOf(raw.body, BODIES),
-    status: oneOf(raw.status, STATUSES),
-    sort: oneOf(raw.sort, SORTS),
-    page: int(raw.page),
+    q: str(raw["q"]),
+    market: oneOf(raw["market"], MARKETS),
+    brand: str(raw["brand"]),
+    model: str(raw["model"]),
+    yearFrom: int(raw["yearFrom"]),
+    yearTo: int(raw["yearTo"]),
+    priceMin: int(raw["priceMin"]),
+    priceMax: int(raw["priceMax"]),
+    mileageMin: int(raw["mileageMin"]),
+    mileageMax: int(raw["mileageMax"]),
+    fuel: oneOf(raw["fuel"], FUELS),
+    transmission: oneOf(raw["transmission"], TRANS),
+    body: oneOf(raw["body"], BODIES),
+    status: oneOf(raw["status"], STATUSES),
+    sort: oneOf(raw["sort"], SORTS),
+    page: int(raw["page"]),
   };
   if (out.page !== undefined && out.page < 1) out.page = undefined;
   (Object.keys(out) as (keyof ListingSearch)[]).forEach((k) => out[k] === undefined && delete out[k]);

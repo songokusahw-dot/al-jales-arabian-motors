@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { CircleCheck } from "lucide-react";
 
-export function DemoSubmitted({ title, children, action }: { title: string; children?: ReactNode; action?: ReactNode }) {
+export function DemoSubmitted({ title, children, action }: { title: string; children?: ReactNode | undefined; action?: ReactNode | undefined }) {
   return (
     <div role="status" className="flex flex-col items-center gap-3 rounded-lg bg-card px-6 py-12 text-center shadow-card">
       <CircleCheck className="size-10 text-success" aria-hidden />

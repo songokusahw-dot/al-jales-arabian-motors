@@ -26,22 +26,22 @@ type Seed = {
   createdAt: string;
   mileageKm: number;
   fuel: FuelType;
-  transmission?: "automatic" | "manual";
+  transmission?: "automatic" | "manual" | undefined;
   body: BodyType;
-  status?: VehicleStatus;
-  engineCc?: number;
-  hp?: number;
-  drivetrain?: string;
-  ext?: string;
-  int?: string;
-  seats?: number;
-  doors?: number;
-  features?: string[];
+  status?: VehicleStatus | undefined;
+  engineCc?: number | undefined;
+  hp?: number | undefined;
+  drivetrain?: string | undefined;
+  ext?: string | undefined;
+  int?: string | undefined;
+  seats?: number | undefined;
+  doors?: number | undefined;
+  features?: string[] | undefined;
   /** Korean vehicles: source price in KRW (demo). */
-  krw?: number;
+  krw?: number | undefined;
   /** Saudi/Yemen showroom vehicles: sale price (demo). */
-  saleSAR?: number;
-  inspection?: Vehicle["inspection"];
+  saleSAR?: number | undefined;
+  inspection?: Vehicle["inspection"] | undefined;
 };
 
 function koreaItems(krw: number): PriceBreakdownItem[] {
