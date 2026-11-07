@@ -53,3 +53,4 @@ use the editor.
 - Never generate vehicle photos; use real/licensed images of the exact vehicle or an honest placeholder. Abstract non-vehicle atmosphere images are allowed.
 - No fake phone/WhatsApp/email/address/coordinates/social accounts; social icons render only with a real URL. No analytics or pixels without authorization. Legal pages are drafts.
 - After each phase: list changed files/routes, dependencies, checks run and results, and remaining placeholders. Test 1440/1024/768/390/360 px, Light/Dark, RTL, keyboard, reduced motion.
+- Homepage sections live in `src/components/site/home/` (one component per section); `routes/index.tsx` only composes them — keeps redesign phases isolated. THE CUT tokens (`--cut-angle`, `--cut-depth`, `surface-stage`, `text-display-xl`, `cut-edge*`) are used selectively, never on every card/button.
