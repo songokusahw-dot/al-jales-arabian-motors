@@ -162,7 +162,7 @@ function Page() {
                   <div className="grid gap-3 sm:grid-cols-2" role="radiogroup" aria-describedby={errors.market ? "market-error" : undefined}>
                     {[...MARKET_LIST.map((m) => ({ v: m, l: `${MARKETS[m].nameAr} — ${MARKETS[m].roleAr}` })), { v: "OPEN", l: "مفتوح — أي سوق" }].map((o) => (
                       <label key={o.v} className={cn("flex cursor-pointer items-center gap-3 rounded-md border p-4 transition-colors has-[:checked]:border-primary has-[:checked]:bg-accent", "has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring")}>
-                        <input type="radio" name="market" value={o.v} checked={form.market === o.v} onChange={() => set("market", o.v)} className="accent-[var(--color-primary)]" />
+                        <input type="radio" name="market" value={o.v} checked={form.market === o.v} onChange={() => set("market", o.v)} className="accent-primary" />
                         {o.l}
                       </label>
                     ))}
@@ -186,7 +186,7 @@ function Page() {
                     {(id) => <TextInput id={id} value={form.model} disabled={form.noModel} onChange={(e) => set("model", e.target.value)} placeholder="مثال: باليسيد" {...inv("model", id)} />}
                   </Field>
                   <label className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" checked={form.noModel} onChange={(e) => { set("noModel", e.target.checked); if (e.target.checked) set("model", ""); }} className="accent-[var(--color-primary)]" />
+                    <input type="checkbox" checked={form.noModel} onChange={(e) => { set("noModel", e.target.checked); if (e.target.checked) set("model", ""); }} className="accent-primary" />
                     لا يوجد موديل محدد
                   </label>
                 </div>

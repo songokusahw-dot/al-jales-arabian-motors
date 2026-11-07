@@ -16,6 +16,7 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as LocationsRouteImport } from './routes/locations'
 import { Route as OurShowroomsRouteImport } from './routes/our-showrooms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as RequestCarRouteImport } from './routes/request-car'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as BrandsBrandSlugRouteImport } from './routes/brands.$brandSlug'
@@ -60,6 +61,11 @@ const OurShowroomsRoute = OurShowroomsRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestCarRoute = RequestCarRouteImport.update({
+  id: '/request-car',
+  path: '/request-car',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SearchRoute = SearchRouteImport.update({
@@ -121,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/locations': typeof LocationsRoute
   '/our-showrooms': typeof OurShowroomsRoute
   '/privacy': typeof PrivacyRoute
+  '/request-car': typeof RequestCarRoute
   '/search': typeof SearchRoute
   '/terms': typeof TermsRoute
   '/brands/$brandSlug': typeof BrandsBrandSlugRoute
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/locations': typeof LocationsRoute
   '/our-showrooms': typeof OurShowroomsRoute
   '/privacy': typeof PrivacyRoute
+  '/request-car': typeof RequestCarRoute
   '/search': typeof SearchRoute
   '/terms': typeof TermsRoute
   '/brands/$brandSlug': typeof BrandsBrandSlugRoute
@@ -160,6 +168,7 @@ export interface FileRoutesById {
   '/locations': typeof LocationsRoute
   '/our-showrooms': typeof OurShowroomsRoute
   '/privacy': typeof PrivacyRoute
+  '/request-car': typeof RequestCarRoute
   '/search': typeof SearchRoute
   '/terms': typeof TermsRoute
   '/brands/$brandSlug': typeof BrandsBrandSlugRoute
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
     | '/locations'
     | '/our-showrooms'
     | '/privacy'
+    | '/request-car'
     | '/search'
     | '/terms'
     | '/brands/$brandSlug'
@@ -200,6 +210,7 @@ export interface FileRouteTypes {
     | '/locations'
     | '/our-showrooms'
     | '/privacy'
+    | '/request-car'
     | '/search'
     | '/terms'
     | '/brands/$brandSlug'
@@ -219,6 +230,7 @@ export interface FileRouteTypes {
     | '/locations'
     | '/our-showrooms'
     | '/privacy'
+    | '/request-car'
     | '/search'
     | '/terms'
     | '/brands/$brandSlug'
@@ -239,6 +251,7 @@ export interface RootRouteChildren {
   LocationsRoute: typeof LocationsRoute
   OurShowroomsRoute: typeof OurShowroomsRoute
   PrivacyRoute: typeof PrivacyRoute
+  RequestCarRoute: typeof RequestCarRoute
   SearchRoute: typeof SearchRoute
   TermsRoute: typeof TermsRoute
   BrandsBrandSlugRoute: typeof BrandsBrandSlugRoute
@@ -300,6 +313,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/request-car': {
+      id: '/request-car'
+      path: '/request-car'
+      fullPath: '/request-car'
+      preLoaderRoute: typeof RequestCarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/search': {
@@ -383,6 +403,7 @@ const rootRouteChildren: RootRouteChildren = {
   LocationsRoute: LocationsRoute,
   OurShowroomsRoute: OurShowroomsRoute,
   PrivacyRoute: PrivacyRoute,
+  RequestCarRoute: RequestCarRoute,
   SearchRoute: SearchRoute,
   TermsRoute: TermsRoute,
   BrandsBrandSlugRoute: BrandsBrandSlugRoute,

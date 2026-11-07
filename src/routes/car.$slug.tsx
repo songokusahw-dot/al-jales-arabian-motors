@@ -168,7 +168,8 @@ function StatusLine({ v }: { v: Vehicle }) {
 }
 
 function Ctas({ v, compact = false }: { v: Vehicle; compact?: boolean }) {
-  const wa = whatsappLink(`مرحباً، أستفسر عن ${v.brandEn} ${v.modelEn} ${v.year ?? ""} — ${v.referenceCode}${typeof window !== "undefined" ? ` — ${window.location.href}` : ""}`);
+  const message = `مرحباً، أستفسر عن ${v.brandEn} ${v.modelEn} ${v.year ?? ""} — ${v.referenceCode}`;
+  const wa = whatsappLink(message);
   return (
     <div className={compact ? "flex shrink-0 gap-2" : "flex flex-col gap-2"}>
       <Button asChild variant={canBook(v) ? "surface" : "hero"} size={compact ? "default" : "lg"}>
@@ -185,7 +186,17 @@ function Ctas({ v, compact = false }: { v: Vehicle; compact?: boolean }) {
       )}
       {wa && !compact && (
         <Button asChild variant="ink" size="lg">
-          <a href={wa} target="_blank" rel="noopener noreferrer">واتساب</a>
+          <a
+            href={wa}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => {
+              const withUrl = whatsappLink(`${message} — ${window.location.href}`);
+              if (withUrl) e.currentTarget.href = withUrl;
+            }}
+          >
+            واتساب
+          </a>
         </Button>
       )}
     </div>
