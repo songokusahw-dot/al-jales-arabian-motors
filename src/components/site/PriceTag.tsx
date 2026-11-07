@@ -20,7 +20,7 @@ export function PriceTag({
   return (
     <div className={cn("min-w-0", className)}>
       <p className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-        {complete ? "سعر البيع" : "السعر التقديري — غير نهائي"}
+        {complete ? "سعر البيع" : size === "sm" ? "سعر تقديري" : "السعر التقديري — غير نهائي"}
         {vehicle.pricing.isDemo && size !== "sm" && <DemoBadge label="سعر تجريبي Demo" />}
       </p>
       <p
