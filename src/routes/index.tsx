@@ -35,7 +35,7 @@ function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative isolate flex min-h-[92svh] items-end overflow-hidden pb-14 pt-28 md:items-center md:pb-20">
+      <section className="relative isolate flex min-h-[min(92svh,60rem)] items-end overflow-hidden pb-14 pt-28 md:items-center md:pb-20">
         <img src={heroImg} alt="" width={1920} height={1088} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
         <div className="scrim-hero absolute inset-0 -z-10" aria-hidden />
         <div className="container-site">
