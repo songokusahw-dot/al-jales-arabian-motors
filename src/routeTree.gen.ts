@@ -10,8 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as LocationsRouteImport } from './routes/locations'
+import { Route as OurShowroomsRouteImport } from './routes/our-showrooms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as TermsRouteImport } from './routes/terms'
@@ -21,10 +24,17 @@ import { Route as CarsIndexRouteImport } from './routes/cars.index'
 import { Route as CarsKoreaRouteImport } from './routes/cars.korea'
 import { Route as CarsSaudiRouteImport } from './routes/cars.saudi'
 import { Route as CarsYemenRouteImport } from './routes/cars.yemen'
+import { Route as KoreaAuctionsRouteImport } from './routes/korea.auctions'
+import { Route as KoreaShowroomsRouteImport } from './routes/korea.showrooms'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CookiesRoute = CookiesRouteImport.update({
@@ -35,6 +45,16 @@ const CookiesRoute = CookiesRouteImport.update({
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocationsRoute = LocationsRouteImport.update({
+  id: '/locations',
+  path: '/locations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OurShowroomsRoute = OurShowroomsRouteImport.update({
+  id: '/our-showrooms',
+  path: '/our-showrooms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -82,11 +102,24 @@ const CarsYemenRoute = CarsYemenRouteImport.update({
   path: '/cars/yemen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KoreaAuctionsRoute = KoreaAuctionsRouteImport.update({
+  id: '/korea/auctions',
+  path: '/korea/auctions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KoreaShowroomsRoute = KoreaShowroomsRouteImport.update({
+  id: '/korea/showrooms',
+  path: '/korea/showrooms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
+  '/locations': typeof LocationsRoute
+  '/our-showrooms': typeof OurShowroomsRoute
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/terms': typeof TermsRoute
@@ -95,12 +128,17 @@ export interface FileRoutesByFullPath {
   '/cars/korea': typeof CarsKoreaRoute
   '/cars/saudi': typeof CarsSaudiRoute
   '/cars/yemen': typeof CarsYemenRoute
+  '/korea/auctions': typeof KoreaAuctionsRoute
+  '/korea/showrooms': typeof KoreaShowroomsRoute
   '/cars/': typeof CarsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
+  '/locations': typeof LocationsRoute
+  '/our-showrooms': typeof OurShowroomsRoute
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/terms': typeof TermsRoute
@@ -109,13 +147,18 @@ export interface FileRoutesByTo {
   '/cars/korea': typeof CarsKoreaRoute
   '/cars/saudi': typeof CarsSaudiRoute
   '/cars/yemen': typeof CarsYemenRoute
+  '/korea/auctions': typeof KoreaAuctionsRoute
+  '/korea/showrooms': typeof KoreaShowroomsRoute
   '/cars': typeof CarsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
+  '/locations': typeof LocationsRoute
+  '/our-showrooms': typeof OurShowroomsRoute
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/terms': typeof TermsRoute
@@ -124,14 +167,19 @@ export interface FileRoutesById {
   '/cars/korea': typeof CarsKoreaRoute
   '/cars/saudi': typeof CarsSaudiRoute
   '/cars/yemen': typeof CarsYemenRoute
+  '/korea/auctions': typeof KoreaAuctionsRoute
+  '/korea/showrooms': typeof KoreaShowroomsRoute
   '/cars/': typeof CarsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/cookies'
     | '/faq'
+    | '/locations'
+    | '/our-showrooms'
     | '/privacy'
     | '/search'
     | '/terms'
@@ -140,12 +188,17 @@ export interface FileRouteTypes {
     | '/cars/korea'
     | '/cars/saudi'
     | '/cars/yemen'
+    | '/korea/auctions'
+    | '/korea/showrooms'
     | '/cars/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/cookies'
     | '/faq'
+    | '/locations'
+    | '/our-showrooms'
     | '/privacy'
     | '/search'
     | '/terms'
@@ -154,12 +207,17 @@ export interface FileRouteTypes {
     | '/cars/korea'
     | '/cars/saudi'
     | '/cars/yemen'
+    | '/korea/auctions'
+    | '/korea/showrooms'
     | '/cars'
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/cookies'
     | '/faq'
+    | '/locations'
+    | '/our-showrooms'
     | '/privacy'
     | '/search'
     | '/terms'
@@ -168,13 +226,18 @@ export interface FileRouteTypes {
     | '/cars/korea'
     | '/cars/saudi'
     | '/cars/yemen'
+    | '/korea/auctions'
+    | '/korea/showrooms'
     | '/cars/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   CookiesRoute: typeof CookiesRoute
   FaqRoute: typeof FaqRoute
+  LocationsRoute: typeof LocationsRoute
+  OurShowroomsRoute: typeof OurShowroomsRoute
   PrivacyRoute: typeof PrivacyRoute
   SearchRoute: typeof SearchRoute
   TermsRoute: typeof TermsRoute
@@ -183,6 +246,8 @@ export interface RootRouteChildren {
   CarsKoreaRoute: typeof CarsKoreaRoute
   CarsSaudiRoute: typeof CarsSaudiRoute
   CarsYemenRoute: typeof CarsYemenRoute
+  KoreaAuctionsRoute: typeof KoreaAuctionsRoute
+  KoreaShowroomsRoute: typeof KoreaShowroomsRoute
   CarsIndexRoute: typeof CarsIndexRoute
 }
 
@@ -193,6 +258,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cookies': {
@@ -207,6 +279,20 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/locations': {
+      id: '/locations'
+      path: '/locations'
+      fullPath: '/locations'
+      preLoaderRoute: typeof LocationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/our-showrooms': {
+      id: '/our-showrooms'
+      path: '/our-showrooms'
+      fullPath: '/our-showrooms'
+      preLoaderRoute: typeof OurShowroomsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -272,13 +358,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CarsYemenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/korea/auctions': {
+      id: '/korea/auctions'
+      path: '/korea/auctions'
+      fullPath: '/korea/auctions'
+      preLoaderRoute: typeof KoreaAuctionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/korea/showrooms': {
+      id: '/korea/showrooms'
+      path: '/korea/showrooms'
+      fullPath: '/korea/showrooms'
+      preLoaderRoute: typeof KoreaShowroomsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   CookiesRoute: CookiesRoute,
   FaqRoute: FaqRoute,
+  LocationsRoute: LocationsRoute,
+  OurShowroomsRoute: OurShowroomsRoute,
   PrivacyRoute: PrivacyRoute,
   SearchRoute: SearchRoute,
   TermsRoute: TermsRoute,
@@ -287,6 +390,8 @@ const rootRouteChildren: RootRouteChildren = {
   CarsKoreaRoute: CarsKoreaRoute,
   CarsSaudiRoute: CarsSaudiRoute,
   CarsYemenRoute: CarsYemenRoute,
+  KoreaAuctionsRoute: KoreaAuctionsRoute,
+  KoreaShowroomsRoute: KoreaShowroomsRoute,
   CarsIndexRoute: CarsIndexRoute,
 }
 export const routeTree = rootRouteImport
