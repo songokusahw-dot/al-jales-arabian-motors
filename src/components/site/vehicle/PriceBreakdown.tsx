@@ -4,10 +4,10 @@ import { computeTotal, DEMO_KRW_TO_SAR } from "@/lib/pricing";
 import { formatSAR } from "@/lib/format";
 import { DemoBadge } from "../badges";
 
-export function PriceBreakdown({ vehicle }: { vehicle: Vehicle }) {
+export function PriceBreakdown({ vehicle, defaultOpen = false }: { vehicle: Vehicle; defaultOpen?: boolean | undefined }) {
   const { totalSAR, complete, unknownItems } = computeTotal(vehicle.pricing);
   return (
-    <Accordion type="single" collapsible className="rounded-lg bg-card px-5 shadow-card">
+    <Accordion type="single" collapsible defaultValue={defaultOpen ? "price" : undefined} className="rounded-lg bg-card px-5 shadow-card">
       <AccordionItem value="price" className="border-none">
         <AccordionTrigger className="font-display text-base font-semibold hover:no-underline">كيف تم احتساب السعر؟</AccordionTrigger>
         <AccordionContent>

@@ -41,8 +41,13 @@ export function VehicleImage({
           className={cn("h-full w-full", fit === "contain" ? "object-contain" : "object-cover", className)}
         />
         {image.isIllustrative && (
-          <span className="absolute bottom-2 start-2 rounded-sm bg-card/90 px-2 py-0.5 text-[0.7rem] font-medium text-card-foreground">
-            صورة توضيحية — ليست السيارة المعروضة
+          <span
+            className={cn(
+              "absolute rounded-sm bg-card/90 font-medium text-card-foreground",
+              compact ? "bottom-1 start-1 px-1 text-[0.6rem]" : "bottom-2 start-2 px-2 py-0.5 text-[0.7rem]",
+            )}
+          >
+            {compact ? "توضيحية" : "صورة توضيحية — ليست السيارة المعروضة"}
           </span>
         )}
       </div>
