@@ -10,6 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as BrandsBrandSlugRouteImport } from './routes/brands.$brandSlug'
+import { Route as CarSlugRouteImport } from './routes/car.$slug'
 import { Route as CarsIndexRouteImport } from './routes/cars.index'
 import { Route as CarsKoreaRouteImport } from './routes/cars.korea'
 import { Route as CarsSaudiRouteImport } from './routes/cars.saudi'
@@ -18,6 +21,21 @@ import { Route as CarsYemenRouteImport } from './routes/cars.yemen'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandsBrandSlugRoute = BrandsBrandSlugRouteImport.update({
+  id: '/brands/$brandSlug',
+  path: '/brands/$brandSlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarSlugRoute = CarSlugRouteImport.update({
+  id: '/car/$slug',
+  path: '/car/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CarsIndexRoute = CarsIndexRouteImport.update({
@@ -43,6 +61,9 @@ const CarsYemenRoute = CarsYemenRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/search': typeof SearchRoute
+  '/brands/$brandSlug': typeof BrandsBrandSlugRoute
+  '/car/$slug': typeof CarSlugRoute
   '/cars/korea': typeof CarsKoreaRoute
   '/cars/saudi': typeof CarsSaudiRoute
   '/cars/yemen': typeof CarsYemenRoute
@@ -50,6 +71,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/search': typeof SearchRoute
+  '/brands/$brandSlug': typeof BrandsBrandSlugRoute
+  '/car/$slug': typeof CarSlugRoute
   '/cars/korea': typeof CarsKoreaRoute
   '/cars/saudi': typeof CarsSaudiRoute
   '/cars/yemen': typeof CarsYemenRoute
@@ -58,6 +82,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/search': typeof SearchRoute
+  '/brands/$brandSlug': typeof BrandsBrandSlugRoute
+  '/car/$slug': typeof CarSlugRoute
   '/cars/korea': typeof CarsKoreaRoute
   '/cars/saudi': typeof CarsSaudiRoute
   '/cars/yemen': typeof CarsYemenRoute
@@ -65,15 +92,42 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cars/korea' | '/cars/saudi' | '/cars/yemen' | '/cars/'
+  fullPaths:
+    | '/'
+    | '/search'
+    | '/brands/$brandSlug'
+    | '/car/$slug'
+    | '/cars/korea'
+    | '/cars/saudi'
+    | '/cars/yemen'
+    | '/cars/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cars/korea' | '/cars/saudi' | '/cars/yemen' | '/cars'
+  to:
+    | '/'
+    | '/search'
+    | '/brands/$brandSlug'
+    | '/car/$slug'
+    | '/cars/korea'
+    | '/cars/saudi'
+    | '/cars/yemen'
+    | '/cars'
   id:
-    '__root__' | '/' | '/cars/korea' | '/cars/saudi' | '/cars/yemen' | '/cars/'
+    | '__root__'
+    | '/'
+    | '/search'
+    | '/brands/$brandSlug'
+    | '/car/$slug'
+    | '/cars/korea'
+    | '/cars/saudi'
+    | '/cars/yemen'
+    | '/cars/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SearchRoute: typeof SearchRoute
+  BrandsBrandSlugRoute: typeof BrandsBrandSlugRoute
+  CarSlugRoute: typeof CarSlugRoute
   CarsKoreaRoute: typeof CarsKoreaRoute
   CarsSaudiRoute: typeof CarsSaudiRoute
   CarsYemenRoute: typeof CarsYemenRoute
@@ -87,6 +141,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brands/$brandSlug': {
+      id: '/brands/$brandSlug'
+      path: '/brands/$brandSlug'
+      fullPath: '/brands/$brandSlug'
+      preLoaderRoute: typeof BrandsBrandSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/car/$slug': {
+      id: '/car/$slug'
+      path: '/car/$slug'
+      fullPath: '/car/$slug'
+      preLoaderRoute: typeof CarSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cars/': {
@@ -122,6 +197,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SearchRoute: SearchRoute,
+  BrandsBrandSlugRoute: BrandsBrandSlugRoute,
+  CarSlugRoute: CarSlugRoute,
   CarsKoreaRoute: CarsKoreaRoute,
   CarsSaudiRoute: CarsSaudiRoute,
   CarsYemenRoute: CarsYemenRoute,
