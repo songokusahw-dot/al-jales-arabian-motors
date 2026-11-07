@@ -11,12 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AskQuestionRouteImport } from './routes/ask-question'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as LocationsRouteImport } from './routes/locations'
 import { Route as OurShowroomsRouteImport } from './routes/our-showrooms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RequestCarRouteImport } from './routes/request-car'
+import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as BrandsBrandSlugRouteImport } from './routes/brands.$brandSlug'
@@ -36,6 +39,16 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AskQuestionRoute = AskQuestionRouteImport.update({
+  id: '/ask-question',
+  path: '/ask-question',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CookiesRoute = CookiesRouteImport.update({
@@ -66,6 +79,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const RequestCarRoute = RequestCarRouteImport.update({
   id: '/request-car',
   path: '/request-car',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SearchRoute = SearchRouteImport.update({
@@ -122,12 +140,15 @@ const KoreaShowroomsRoute = KoreaShowroomsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/ask-question': typeof AskQuestionRoute
+  '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/locations': typeof LocationsRoute
   '/our-showrooms': typeof OurShowroomsRoute
   '/privacy': typeof PrivacyRoute
   '/request-car': typeof RequestCarRoute
+  '/reviews': typeof ReviewsRoute
   '/search': typeof SearchRoute
   '/terms': typeof TermsRoute
   '/brands/$brandSlug': typeof BrandsBrandSlugRoute
@@ -142,12 +163,15 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/ask-question': typeof AskQuestionRoute
+  '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/locations': typeof LocationsRoute
   '/our-showrooms': typeof OurShowroomsRoute
   '/privacy': typeof PrivacyRoute
   '/request-car': typeof RequestCarRoute
+  '/reviews': typeof ReviewsRoute
   '/search': typeof SearchRoute
   '/terms': typeof TermsRoute
   '/brands/$brandSlug': typeof BrandsBrandSlugRoute
@@ -163,12 +187,15 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/ask-question': typeof AskQuestionRoute
+  '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/locations': typeof LocationsRoute
   '/our-showrooms': typeof OurShowroomsRoute
   '/privacy': typeof PrivacyRoute
   '/request-car': typeof RequestCarRoute
+  '/reviews': typeof ReviewsRoute
   '/search': typeof SearchRoute
   '/terms': typeof TermsRoute
   '/brands/$brandSlug': typeof BrandsBrandSlugRoute
@@ -185,12 +212,15 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/ask-question'
+    | '/contact'
     | '/cookies'
     | '/faq'
     | '/locations'
     | '/our-showrooms'
     | '/privacy'
     | '/request-car'
+    | '/reviews'
     | '/search'
     | '/terms'
     | '/brands/$brandSlug'
@@ -205,12 +235,15 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/ask-question'
+    | '/contact'
     | '/cookies'
     | '/faq'
     | '/locations'
     | '/our-showrooms'
     | '/privacy'
     | '/request-car'
+    | '/reviews'
     | '/search'
     | '/terms'
     | '/brands/$brandSlug'
@@ -225,12 +258,15 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/ask-question'
+    | '/contact'
     | '/cookies'
     | '/faq'
     | '/locations'
     | '/our-showrooms'
     | '/privacy'
     | '/request-car'
+    | '/reviews'
     | '/search'
     | '/terms'
     | '/brands/$brandSlug'
@@ -246,12 +282,15 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AskQuestionRoute: typeof AskQuestionRoute
+  ContactRoute: typeof ContactRoute
   CookiesRoute: typeof CookiesRoute
   FaqRoute: typeof FaqRoute
   LocationsRoute: typeof LocationsRoute
   OurShowroomsRoute: typeof OurShowroomsRoute
   PrivacyRoute: typeof PrivacyRoute
   RequestCarRoute: typeof RequestCarRoute
+  ReviewsRoute: typeof ReviewsRoute
   SearchRoute: typeof SearchRoute
   TermsRoute: typeof TermsRoute
   BrandsBrandSlugRoute: typeof BrandsBrandSlugRoute
@@ -278,6 +317,20 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ask-question': {
+      id: '/ask-question'
+      path: '/ask-question'
+      fullPath: '/ask-question'
+      preLoaderRoute: typeof AskQuestionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cookies': {
@@ -320,6 +373,13 @@ declare module '@tanstack/react-router' {
       path: '/request-car'
       fullPath: '/request-car'
       preLoaderRoute: typeof RequestCarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/search': {
@@ -398,12 +458,15 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AskQuestionRoute: AskQuestionRoute,
+  ContactRoute: ContactRoute,
   CookiesRoute: CookiesRoute,
   FaqRoute: FaqRoute,
   LocationsRoute: LocationsRoute,
   OurShowroomsRoute: OurShowroomsRoute,
   PrivacyRoute: PrivacyRoute,
   RequestCarRoute: RequestCarRoute,
+  ReviewsRoute: ReviewsRoute,
   SearchRoute: SearchRoute,
   TermsRoute: TermsRoute,
   BrandsBrandSlugRoute: BrandsBrandSlugRoute,
