@@ -1,18 +1,96 @@
 {
   "source": "code-archive: AL_JALES_LOVABLE_PROMPT_KIT.zip (instruction kit, no application code)",
   "capabilities": [
-    {"capability": "code", "source": "Prompt kit phases 01-08 (no source code)", "outcome": "build full Arabic RTL frontend on TanStack Start", "status": "in_progress", "next_action": "build all routes"},
-    {"capability": "schema", "source": "docs/DATA_MODEL_AR.md (typed local data only)", "outcome": "typed TS data module; kit forbids DB in this version", "status": "accepted_absent", "next_action": "none"},
-    {"capability": "records", "source": "none; kit requests ~18 demo vehicles", "outcome": "demo data labelled Demo", "status": "in_progress", "next_action": "replace with real inventory when supplied"},
-    {"capability": "auth_identities", "source": "none", "outcome": "kit forbids auth in this version", "status": "accepted_absent", "next_action": "none"},
-    {"capability": "authorization", "source": "none", "outcome": "n/a", "status": "accepted_absent", "next_action": "none"},
-    {"capability": "uploaded_file_bytes", "source": "vehicle photos not supplied", "outcome": "honest placeholders; user will upload later", "status": "pending_user", "next_action": "user uploads real vehicle photos"},
-    {"capability": "forms", "source": "request-car, reviews, ask-question, contact", "outcome": "local-only demo submissions with explicit not-sent notice", "status": "in_progress", "next_action": "build"},
-    {"capability": "external_providers", "source": "none (no analytics/pixels allowed)", "outcome": "none", "status": "accepted_absent", "next_action": "none"},
-    {"capability": "public_endpoints_callbacks_webhooks_schedules", "source": "none", "outcome": "none", "status": "accepted_absent", "next_action": "none"},
-    {"capability": "secrets", "source": "none", "outcome": "none", "status": "accepted_absent", "next_action": "none"},
-    {"capability": "contact_details", "source": "siteConfig nullable values", "outcome": "null until company supplies phone/WhatsApp/email/branches", "status": "pending_user", "next_action": "user supplies real contact details"},
-    {"capability": "cutover", "source": "n/a", "outcome": "n/a", "status": "accepted_absent", "next_action": "none"},
-    {"capability": "verification", "source": "QA matrix", "outcome": "routes, filters, URL sync, marquee, gallery, forms", "status": "pending", "next_action": "run tests and browser checks"}
+    {
+      "capability": "code",
+      "source": "Prompt kit phases 01-08 (no source code)",
+      "outcome": "build full Arabic RTL frontend on TanStack Start",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "schema",
+      "source": "docs/DATA_MODEL_AR.md (typed local data only)",
+      "outcome": "typed TS data module; kit forbids DB in this version",
+      "status": "accepted_absent",
+      "next_action": "none"
+    },
+    {
+      "capability": "records",
+      "source": "none; kit requests ~18 demo vehicles",
+      "outcome": "demo data labelled Demo",
+      "status": "pending_user",
+      "next_action": "user supplies real inventory (CSV/JSON or list)"
+    },
+    {
+      "capability": "auth_identities",
+      "source": "none",
+      "outcome": "kit forbids auth in this version",
+      "status": "accepted_absent",
+      "next_action": "none"
+    },
+    {
+      "capability": "authorization",
+      "source": "none",
+      "outcome": "n/a",
+      "status": "accepted_absent",
+      "next_action": "none"
+    },
+    {
+      "capability": "uploaded_file_bytes",
+      "source": "vehicle photos not supplied",
+      "outcome": "honest placeholders; user will upload later",
+      "status": "pending_user",
+      "next_action": "user uploads real vehicle photos"
+    },
+    {
+      "capability": "forms",
+      "source": "request-car, reviews, ask-question, contact",
+      "outcome": "local-only demo submissions with explicit not-sent notice",
+      "status": "verified",
+      "next_action": "connect real delivery only if user asks"
+    },
+    {
+      "capability": "external_providers",
+      "source": "none (no analytics/pixels allowed)",
+      "outcome": "none",
+      "status": "accepted_absent",
+      "next_action": "none"
+    },
+    {
+      "capability": "public_endpoints_callbacks_webhooks_schedules",
+      "source": "none",
+      "outcome": "none",
+      "status": "accepted_absent",
+      "next_action": "none"
+    },
+    {
+      "capability": "secrets",
+      "source": "none",
+      "outcome": "none",
+      "status": "accepted_absent",
+      "next_action": "none"
+    },
+    {
+      "capability": "contact_details",
+      "source": "siteConfig nullable values",
+      "outcome": "null until company supplies phone/WhatsApp/email/branches",
+      "status": "pending_user",
+      "next_action": "user supplies real contact details"
+    },
+    {
+      "capability": "cutover",
+      "source": "n/a",
+      "outcome": "n/a",
+      "status": "accepted_absent",
+      "next_action": "none"
+    },
+    {
+      "capability": "verification",
+      "source": "QA matrix",
+      "outcome": "typecheck clean; 34 tests pass; browser checks of routes, marquee RTL direction, filters+URL+back, lightbox, dark persistence, sold CTA, 390px overflow",
+      "status": "verified",
+      "next_action": "none"
+    }
   ]
 }
