@@ -25,11 +25,13 @@ export function ImportJourney() {
         if (!path) return;
         const len = path.getTotalLength();
         gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
+        const track = root.current?.querySelector<HTMLElement>("[data-journey-track]");
         const tl = gsap.timeline({
-          scrollTrigger: { trigger: root.current, start: "top 75%", end: "bottom 60%", scrub: 0.6 },
+          scrollTrigger: { trigger: root.current, start: "top 75%", end: "bottom 60%", scrub: 0.6, invalidateOnRefresh: true },
         });
         tl.to(path, { strokeDashoffset: 0, ease: "none" }, 0);
-        tl.fromTo("[data-journey-marker]", { xPercent: 0 }, { xPercent: -100, ease: "none" }, 0);
+        // RTL: travel from the right edge to the left edge of the track.
+        tl.fromTo("[data-journey-marker]", { x: 0 }, { x: () => -((track?.offsetWidth ?? 16) - 16), ease: "none" }, 0);
         gsap.from("[data-journey-step]", {
           opacity: 0,
           y: 16,
@@ -51,8 +53,8 @@ export function ImportJourney() {
           <path d="M1000 20 C 850 0, 750 40, 600 20 S 350 0, 200 20 S 50 40, 0 20" fill="none" className="stroke-border" strokeWidth="2" />
           <path data-journey-path d="M1000 20 C 850 0, 750 40, 600 20 S 350 0, 200 20 S 50 40, 0 20" fill="none" className="stroke-primary" strokeWidth="3" strokeLinecap="round" />
         </svg>
-        <div className="absolute inset-y-0 start-0 w-full">
-          <span data-journey-marker className="absolute top-1/2 block size-4 -translate-y-1/2 rounded-full border-4 border-card bg-primary shadow-card" style={{ insetInlineStart: 0 }} />
+        <div data-journey-track className="absolute inset-y-0 start-0 w-full">
+          <span data-journey-marker className="absolute end-auto start-0 top-1/2 block size-4 -translate-y-1/2 rounded-full border-4 border-card bg-primary shadow-card" />
         </div>
       </div>
       <ol className="mt-6 grid gap-4 md:grid-cols-5">
