@@ -7,8 +7,8 @@ export function SiteFooter() {
   return (
     <footer className="mt-24 bg-ink text-ink-foreground">
       <div className="container-site grid gap-12 py-16 md:grid-cols-[1.3fr_repeat(3,1fr)]">
-        <div className="flex flex-col gap-5 [&_a]:text-ink-foreground [&_.text-muted-foreground]:text-ink-foreground/70">
-          <Logo />
+        <div className="flex flex-col gap-5">
+          <Logo inverted />
           <p className="max-w-xs text-sm leading-relaxed text-ink-foreground/75">
             تجربة عربية لاختيار السيارات من كوريا ومعرضي السعودية واليمن، بأسعار معروضة بالريال السعودي.
           </p>
