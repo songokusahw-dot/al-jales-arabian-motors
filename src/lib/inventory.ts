@@ -6,22 +6,22 @@ import { getBrand } from "@/data/brands";
 export type SortKey = "latest" | "price-asc" | "price-desc" | "mileage-asc";
 
 export type ListingSearch = {
-  q?: string;
-  market?: MarketCode;
-  brand?: string;
-  model?: string;
-  yearFrom?: number;
-  yearTo?: number;
-  priceMin?: number;
-  priceMax?: number;
-  mileageMin?: number;
-  mileageMax?: number;
-  fuel?: FuelType;
-  transmission?: Transmission;
-  body?: BodyType;
-  status?: VehicleStatus;
-  sort?: SortKey;
-  page?: number;
+  q?: string | undefined;
+  market?: MarketCode | undefined;
+  brand?: string | undefined;
+  model?: string | undefined;
+  yearFrom?: number | undefined;
+  yearTo?: number | undefined;
+  priceMin?: number | undefined;
+  priceMax?: number | undefined;
+  mileageMin?: number | undefined;
+  mileageMax?: number | undefined;
+  fuel?: FuelType | undefined;
+  transmission?: Transmission | undefined;
+  body?: BodyType | undefined;
+  status?: VehicleStatus | undefined;
+  sort?: SortKey | undefined;
+  page?: number | undefined;
 };
 
 export const PAGE_SIZE = 9;
@@ -95,7 +95,7 @@ export function matchesQuery(v: Vehicle, q: string): boolean {
   return needle.split(" ").every((token) => haystack.includes(token));
 }
 
-export type Fixed = { market?: MarketCode; brand?: string };
+export type Fixed = { market?: MarketCode | undefined; brand?: string | undefined };
 
 export function filterVehicles(list: Vehicle[], s: ListingSearch, fixed: Fixed = {}): Vehicle[] {
   const market = fixed.market ?? s.market;

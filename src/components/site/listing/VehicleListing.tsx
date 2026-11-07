@@ -358,7 +358,7 @@ function FiltersForm({ search, fixed, update }: { search: ListingSearch; fixed: 
   );
 }
 
-function PriceInput({ label, value, onCommit }: { label: string; value?: number; onCommit: (v: number | undefined) => void }) {
+function PriceInput({ label, value, onCommit }: { label: string; value?: number | undefined; onCommit: (v: number | undefined) => void }) {
   const [draft, setDraft] = useState(value?.toString() ?? "");
   useEffect(() => setDraft(value?.toString() ?? ""), [value]);
   const commit = () => {
