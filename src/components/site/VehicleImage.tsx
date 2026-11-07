@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ImageOff } from "lucide-react";
 import type { VehicleImage as Img } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -8,21 +9,43 @@ export function VehicleImage({
   className,
   eager = false,
   compact = false,
+  fit = "cover",
+  sizes,
 }: {
   image: Img | undefined;
   className?: string | undefined;
   eager?: boolean | undefined;
   compact?: boolean | undefined;
+  /** "contain" keeps the whole vehicle visible on the stage surface. */
+  fit?: "cover" | "contain" | undefined;
+  /** Only used when the image has a real srcSet. */
+  sizes?: string | undefined;
 }) {
-  if (image?.src && !image.isPlaceholder) {
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const usable = image?.src && !image.isPlaceholder && failedSrc !== image.src;
+
+  if (usable && image.src) {
+    const src = image.src;
     return (
-      <img
-        src={image.src}
-        alt={image.altAr}
-        loading={eager ? "eager" : "lazy"}
-        decoding="async"
-        className={cn("h-full w-full object-cover", className)}
-      />
+      <div className={cn("relative h-full w-full", fit === "contain" && "bg-surface-stage")}>
+        <img
+          src={src}
+          srcSet={image.srcSet}
+          sizes={image.srcSet ? (sizes ?? "100vw") : undefined}
+          width={image.width}
+          height={image.height}
+          alt={image.altAr}
+          loading={eager ? "eager" : "lazy"}
+          decoding="async"
+          onError={() => setFailedSrc(src)}
+          className={cn("h-full w-full", fit === "contain" ? "object-contain" : "object-cover", className)}
+        />
+        {image.isIllustrative && (
+          <span className="absolute bottom-2 start-2 rounded-sm bg-card/90 px-2 py-0.5 text-[0.7rem] font-medium text-card-foreground">
+            صورة توضيحية — ليست السيارة المعروضة
+          </span>
+        )}
+      </div>
     );
   }
   return (

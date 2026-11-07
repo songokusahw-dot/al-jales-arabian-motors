@@ -11,6 +11,13 @@ export type VehicleImage = {
   sourceUrl?: string | undefined;
   licenseNote?: string | undefined;
   isPlaceholder: boolean;
+  /** Intrinsic pixel size of the source file, when known. */
+  width?: number | undefined;
+  height?: number | undefined;
+  /** Real alternative sources only, e.g. "/a-800.jpg 800w, /a-1600.jpg 1600w". */
+  srcSet?: string | undefined;
+  /** Real photo of the same model, not the listed vehicle. */
+  isIllustrative?: boolean | undefined;
 };
 
 export type PriceBreakdownItem = {
