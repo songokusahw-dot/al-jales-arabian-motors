@@ -26,43 +26,48 @@ export function SiteHeader() {
 
   return (
     <header
+      data-scrolled={scrolled ? "" : undefined}
       className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-[background-color,box-shadow,border-color] duration-300",
-        solid ? "border-b bg-background/90 shadow-card backdrop-blur-md" : "border-b border-transparent bg-transparent",
+        "fixed inset-x-0 top-0 z-40 border-b transition-[background-color,box-shadow,border-color,backdrop-filter] duration-300 ease-out",
+        solid ? "border-border/80 bg-background/85 shadow-card backdrop-blur-md" : "border-transparent bg-transparent",
       )}
     >
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-3 focus:rounded-md focus:bg-card focus:px-3 focus:py-2">
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-3 focus:z-50 focus:rounded-md focus:bg-card focus:px-3 focus:py-2">
         تخطَّ إلى المحتوى
       </a>
-      <div className="container-site flex h-16 items-center justify-between gap-4 md:h-20">
+      <div
+        className={cn(
+          "container-site flex h-14 items-center justify-between gap-4 transition-[height] duration-300 ease-out",
+          scrolled ? "md:h-14" : "md:h-16",
+        )}
+      >
         <Logo />
 
-        <nav aria-label="القائمة الرئيسية" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="القائمة الرئيسية" className="hidden items-center gap-0.5 lg:flex">
           {MAIN_NAV.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
-              activeProps={{ className: "text-foreground after:block after:h-0.5 after:bg-primary after:mt-1" }}
+              className="relative rounded-md px-3 py-2 text-[0.8125rem] font-medium text-foreground/75 transition-colors after:absolute after:inset-x-3 after:bottom-0.5 after:h-0.5 after:origin-center after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:text-foreground hover:after:scale-x-50 data-[status=active]:text-foreground data-[status=active]:after:scale-x-100"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5">
           <Button asChild variant="ghost" size="icon" aria-label="البحث عن سيارة">
             <Link to="/search">
               <Search />
             </Link>
           </Button>
           <ThemeToggle />
-          <Button asChild variant="hero" className="hidden md:inline-flex">
+          <Button asChild variant="hero" size="sm" className="ms-2 hidden h-9 px-4 text-sm md:inline-flex">
             <Link to="/request-car">اطلب سيارة</Link>
           </Button>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden" aria-label="فتح القائمة">
+              <Button variant="ghost" size="icon" className="lg:hidden" aria-label={open ? "إغلاق القائمة" : "فتح القائمة"}>
                 <Menu />
               </Button>
             </SheetTrigger>
@@ -73,7 +78,11 @@ export function SiteHeader() {
               <nav aria-label="قائمة الهاتف" className="mt-6 flex flex-col gap-6">
                 <div className="flex flex-col">
                   {MAIN_NAV.map((item) => (
-                    <Link key={item.to} to={item.to} className="border-b py-3 font-display text-lg font-semibold">
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      className="flex items-center justify-between border-b py-3 font-display text-lg font-semibold transition-colors hover:text-accent-text data-[status=active]:text-accent-text"
+                    >
                       {item.label}
                     </Link>
                   ))}
@@ -83,7 +92,7 @@ export function SiteHeader() {
                     <p className="eyebrow mb-2">{group.title}</p>
                     <div className="flex flex-col gap-2">
                       {group.links.map((l) => (
-                        <Link key={l.to} to={l.to} className="py-1 text-muted-foreground hover:text-foreground">
+                        <Link key={l.to} to={l.to} className="py-1 text-muted-foreground hover:text-foreground data-[status=active]:text-foreground">
                           {l.label}
                         </Link>
                       ))}
