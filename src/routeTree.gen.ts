@@ -10,33 +10,74 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CarsIndexRouteImport } from './routes/cars.index'
+import { Route as CarsKoreaRouteImport } from './routes/cars.korea'
+import { Route as CarsSaudiRouteImport } from './routes/cars.saudi'
+import { Route as CarsYemenRouteImport } from './routes/cars.yemen'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CarsIndexRoute = CarsIndexRouteImport.update({
+  id: '/cars/',
+  path: '/cars/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarsKoreaRoute = CarsKoreaRouteImport.update({
+  id: '/cars/korea',
+  path: '/cars/korea',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarsSaudiRoute = CarsSaudiRouteImport.update({
+  id: '/cars/saudi',
+  path: '/cars/saudi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarsYemenRoute = CarsYemenRouteImport.update({
+  id: '/cars/yemen',
+  path: '/cars/yemen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cars/korea': typeof CarsKoreaRoute
+  '/cars/saudi': typeof CarsSaudiRoute
+  '/cars/yemen': typeof CarsYemenRoute
+  '/cars/': typeof CarsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cars/korea': typeof CarsKoreaRoute
+  '/cars/saudi': typeof CarsSaudiRoute
+  '/cars/yemen': typeof CarsYemenRoute
+  '/cars': typeof CarsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cars/korea': typeof CarsKoreaRoute
+  '/cars/saudi': typeof CarsSaudiRoute
+  '/cars/yemen': typeof CarsYemenRoute
+  '/cars/': typeof CarsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/cars/korea' | '/cars/saudi' | '/cars/yemen' | '/cars/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/cars/korea' | '/cars/saudi' | '/cars/yemen' | '/cars'
+  id:
+    '__root__' | '/' | '/cars/korea' | '/cars/saudi' | '/cars/yemen' | '/cars/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CarsKoreaRoute: typeof CarsKoreaRoute
+  CarsSaudiRoute: typeof CarsSaudiRoute
+  CarsYemenRoute: typeof CarsYemenRoute
+  CarsIndexRoute: typeof CarsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +89,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cars/': {
+      id: '/cars/'
+      path: '/cars'
+      fullPath: '/cars/'
+      preLoaderRoute: typeof CarsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cars/korea': {
+      id: '/cars/korea'
+      path: '/cars/korea'
+      fullPath: '/cars/korea'
+      preLoaderRoute: typeof CarsKoreaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cars/saudi': {
+      id: '/cars/saudi'
+      path: '/cars/saudi'
+      fullPath: '/cars/saudi'
+      preLoaderRoute: typeof CarsSaudiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cars/yemen': {
+      id: '/cars/yemen'
+      path: '/cars/yemen'
+      fullPath: '/cars/yemen'
+      preLoaderRoute: typeof CarsYemenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CarsKoreaRoute: CarsKoreaRoute,
+  CarsSaudiRoute: CarsSaudiRoute,
+  CarsYemenRoute: CarsYemenRoute,
+  CarsIndexRoute: CarsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
