@@ -210,10 +210,10 @@ function StageCarousel({
           </button>
           {n > 1 && (
             <>
-              <button type="button" onClick={() => go(active - 1)} disabled={active === 0} aria-label="الصورة السابقة" className={cn(CONTROL, "absolute start-3 top-1/2 -translate-y-1/2 active:-translate-y-1/2")}>
+              <button type="button" onClick={() => go(active - 1)} disabled={active === 0} aria-label="الصورة السابقة" className={cn(CONTROL, "absolute start-3 top-1/2 -translate-y-1/2")}>
                 <ChevronRight className="size-5" aria-hidden />
               </button>
-              <button type="button" onClick={() => go(active + 1)} disabled={active === n - 1} aria-label="الصورة التالية" className={cn(CONTROL, "absolute end-3 top-1/2 -translate-y-1/2 active:-translate-y-1/2")}>
+              <button type="button" onClick={() => go(active + 1)} disabled={active === n - 1} aria-label="الصورة التالية" className={cn(CONTROL, "absolute end-3 top-1/2 -translate-y-1/2")}>
                 <ChevronLeft className="size-5" aria-hidden />
               </button>
             </>
