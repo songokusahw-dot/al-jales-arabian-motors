@@ -64,6 +64,9 @@
   --color-surface-stage: var(--surface-stage);
   --text-display-xl: clamp(2.5rem, 1.6rem + 4vw, 5.5rem);
   --text-display-xl--line-height: 1.12;
+  /* Product titles (vehicle page): prominent, never hero-sized. */
+  --text-display-md: clamp(1.75rem, 1.35rem + 1.5vw, 2.75rem);
+  --text-display-md--line-height: 1.2;
 
   --shadow-card: var(--shadow-card-value);
   --shadow-lift: var(--shadow-lift-value);
@@ -74,6 +77,8 @@
   /* THE CUT — brand diagonal. Use selectively (hero, markets, key transitions). */
   --cut-angle: 12deg;
   --cut-depth: 3rem;
+  /* Horizontal run of a vertical cut (hero stage panel); ≈ tan(--cut-angle) × hero height. */
+  --cut-slant: 7rem;
   --surface-stage: oklch(0.906 0.004 255); /* vehicle stage, = accent */
   --background: oklch(0.937 0.003 264.5); /* canvas #E9EAEC */
   --foreground: oklch(0.187 0.006 271.1); /* ink #121316 */
@@ -276,5 +281,69 @@
   }
   @supports not (clip-path: polygon(0 0, 1px 0, 0 1px)) {
     clip-path: none;
+  }
+}
+
+/* THE CUT — slanted inner edge for an end-side stage panel (start edge leans). Mirrors in RTL. */
+@utility cut-slant {
+  clip-path: polygon(var(--cut-slant) 0, 100% 0, 100% 100%, 0 100%);
+  &:where([dir="rtl"], [dir="rtl"] *) {
+    clip-path: polygon(0 0, calc(100% - var(--cut-slant)) 0, 100% 100%, 0 100%);
+  }
+  @supports not (clip-path: polygon(0 0, 1px 0, 0 1px)) {
+    clip-path: none;
+  }
+}
+
+/* Oversized reference code behind the vehicle (decorative; parent must be an @container). */
+@utility stage-code {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3rem, 19cqi, 9rem);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  direction: ltr;
+  unicode-bidi: isolate;
+  color: color-mix(in oklab, var(--color-foreground) 7%, transparent);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Motion — CSS only, opacity/transform/clip-path (no layout shift). Reduced motion ends instantly via the base rule. */
+@utility cut-reveal {
+  animation: cut-reveal 1.1s cubic-bezier(0.65, 0, 0.35, 1) both;
+  &:where([dir="ltr"], [dir="ltr"] *) {
+    animation-name: cut-reveal-ltr;
+  }
+}
+@utility stage-in {
+  animation: stage-in 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.25s both;
+}
+@utility fade-soft {
+  animation: fade-soft 0.45s ease-out both;
+}
+
+@keyframes cut-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes cut-reveal-ltr {
+  from { clip-path: inset(0 0 0 100%); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes stage-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade-soft {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Room for the vehicle page's fixed mobile action bar, so it never covers the page or footer. */
+@media (max-width: 1023.98px) {
+  body:has([data-sticky-actions]) {
+    padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
   }
 }
