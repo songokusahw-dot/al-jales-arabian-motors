@@ -199,8 +199,10 @@ function StageCarousel({
             </div>
           </div>
 
-          <span className="ltr-iso pointer-events-none absolute start-3 top-3 rounded-full bg-card/90 px-3 py-1 text-xs font-semibold text-card-foreground shadow-card">
-            {active + 1} / {n}
+          <span className="pointer-events-none absolute start-3 top-3 rounded-full bg-card/90 px-3 py-1 text-xs font-semibold text-card-foreground shadow-card" aria-hidden>
+            <span className="ltr-iso">
+              {active + 1} / {n}
+            </span>
           </span>
           <span className="sr-only" aria-live="polite">
             الصورة {active + 1} من {n}

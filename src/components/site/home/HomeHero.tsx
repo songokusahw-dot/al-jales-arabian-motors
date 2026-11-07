@@ -24,19 +24,20 @@ export function HomeHero() {
   return (
     <section aria-labelledby="hero-title" className="relative isolate overflow-hidden pt-14 md:pt-16">
       {/* THE CUT — desktop stage panel with a slanted inner edge and a thin red edge line */}
-      <div aria-hidden className="cut-reveal pointer-events-none absolute inset-y-0 end-0 -z-10 hidden w-[46%] lg:block">
+      <div aria-hidden className="cut-reveal pointer-events-none absolute bottom-0 end-0 top-16 -z-10 hidden w-[46%] lg:block">
         <div className="cut-slant absolute inset-0 bg-primary" />
-        <div className="cut-slant absolute inset-y-0 start-[6px] end-0 bg-surface-stage" />
+        <div className="cut-slant absolute inset-y-0 start-[4px] end-0 bg-surface-stage" />
       </div>
 
-      <div className="container-site grid gap-y-10 pt-8 md:pt-12 lg:min-h-[min(86svh,50rem)] lg:grid-cols-12 lg:items-center lg:gap-x-8 lg:py-16">
+      <div className="container-site grid gap-y-8 pt-7 md:pt-12 lg:min-h-[min(86svh,50rem)] lg:grid-cols-12 lg:items-center lg:gap-x-8 lg:py-16">
         <div className="lg:col-span-7 lg:pe-10">
           <p className="eyebrow reveal-up">AL-JALES AUTOMOTIVE · كوريا · السعودية · اليمن</p>
           <h1 id="hero-title" className="mt-4 text-display-xl font-bold">
-            <span className="reveal-up block [animation-delay:90ms]">سيارتك القادمة،</span>
-            <span className="reveal-up block [animation-delay:200ms]">من المصدر إلى بابك.</span>
+            <span className="reveal-up block [animation-delay:80ms]">سيارتك القادمة،</span>
+            <span className="reveal-up block [animation-delay:170ms]">من المصدر</span>
+            <span className="reveal-up block [animation-delay:260ms]">إلى بابك.</span>
           </h1>
-          <p className="reveal-up mt-5 max-w-xl text-base leading-relaxed text-muted-foreground [animation-delay:300ms] md:text-lg">
+          <p className="reveal-up mt-5 max-w-xl text-base leading-relaxed text-muted-foreground [animation-delay:340ms] md:text-lg">
             نختار السيارات من السوق الكوري ونعرضها مع سيارات معرضي السعودية واليمن، بأسعار واضحة بالريال السعودي.
           </p>
           <div className="reveal-up mt-7 flex flex-wrap items-center gap-x-6 gap-y-4 [animation-delay:400ms]">
@@ -73,7 +74,7 @@ function HeroStage({ v }: { v: Vehicle }) {
   const title = `${v.brandAr} ${v.modelAr}`;
   const facts = primarySpecs(v).filter((s) => s.key === "mileage" || s.key === "fuel" || s.key === "transmission");
   return (
-    <div className="relative -mx-5 px-5 pb-12 pt-14 md:-mx-8 md:px-8 md:pt-20 lg:col-span-5 lg:mx-0 lg:px-0 lg:py-0">
+    <div className="relative -mx-5 px-5 pb-12 pt-12 md:-mx-8 md:px-8 md:pt-20 lg:col-span-5 lg:mx-0 lg:px-0 lg:py-0">
       {/* Mobile/tablet: the same cut becomes a diagonal top edge */}
       <div aria-hidden className="absolute inset-0 -z-10 lg:hidden">
         <div className="cut-edge-top absolute inset-0 bg-primary" />
@@ -81,14 +82,14 @@ function HeroStage({ v }: { v: Vehicle }) {
       </div>
 
       <figure className="@container relative">
-        <span aria-hidden className="stage-code fade-soft absolute inset-x-0 top-[8%] text-center [animation-delay:500ms]">
+        <span aria-hidden className="stage-code fade-soft absolute inset-x-0 top-[22%] text-center [animation-delay:500ms]">
           {v.referenceCode}
         </span>
-        <div className="stage-in relative mx-auto aspect-[16/10] max-w-xl">
+        <div className="stage-in relative mx-auto aspect-[16/9] max-w-xl">
           <VehicleImage image={v.gallery[0]} eager fit="contain" className="bg-transparent" sizes="(min-width: 1024px) 40vw, 100vw" />
         </div>
 
-        <figcaption className="reveal-up relative mx-auto mt-2 max-w-xl rounded-lg bg-card p-5 shadow-lift [animation-delay:550ms]">
+        <figcaption className="reveal-up relative mx-auto -mt-4 max-w-xl rounded-lg bg-card p-5 shadow-lift [animation-delay:550ms]">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="eyebrow">سيارة مختارة</p>
             <div className="flex flex-wrap items-center gap-1.5">

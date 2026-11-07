@@ -299,13 +299,13 @@
 @utility stage-code {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(3rem, 19cqi, 9rem);
+  font-size: clamp(2.75rem, 16cqi, 8.5rem);
   line-height: 0.85;
   letter-spacing: -0.03em;
   white-space: nowrap;
   direction: ltr;
   unicode-bidi: isolate;
-  color: color-mix(in oklab, var(--color-foreground) 7%, transparent);
+  color: color-mix(in oklab, var(--color-foreground) 6%, transparent);
   user-select: none;
   pointer-events: none;
 }
