@@ -32,7 +32,7 @@ function Page() {
                   <Link to="/request-car">اطلب سيارة من المزاد</Link>
                 </Button>
                 <Button asChild variant="surface">
-                  <Link to="/cars/$slug" params={{ slug: "korea" }}>سيارات كوريا المتاحة</Link>
+                  <Link to="/cars/korea">سيارات كوريا المتاحة</Link>
                 </Button>
               </>
             }

@@ -110,8 +110,7 @@ function HomePage() {
               return (
                 <li key={m}>
                   <Link
-                    to="/cars/$slug"
-                    params={{ slug: cfg.slug }}
+                    to={cfg.path}
                     className="group relative flex h-full flex-col justify-between gap-10 overflow-hidden rounded-lg bg-background p-7 shadow-card transition-shadow hover:shadow-lift"
                   >
                     <div className="flex items-start justify-between">
@@ -186,7 +185,7 @@ function HomePage() {
 
       {/* JOURNEY */}
       <section className="container-site py-20">
-        <SectionHead eyebrow="من كوريا إليك" title="رحلة الاستيراد بخمس مراحل" action={<Link to="/cars/$slug" params={{ slug: "korea" }}>سيارات كوريا</Link>} />
+        <SectionHead eyebrow="من كوريا إليك" title="رحلة الاستيراد بخمس مراحل" action={<Link to="/cars/korea">سيارات كوريا</Link>} />
         <div className="mt-10">
           <ImportJourney />
         </div>

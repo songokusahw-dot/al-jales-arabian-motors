@@ -24,7 +24,7 @@ function Page() {
             action={
               <>
                 <Button asChild variant="hero">
-                  <Link to="/cars/$slug" params={{ slug: "korea" }}>سيارات كوريا</Link>
+                  <Link to="/cars/korea">سيارات كوريا</Link>
                 </Button>
                 <Button asChild variant="surface">
                   <Link to="/korea/auctions">المزادات الكورية</Link>

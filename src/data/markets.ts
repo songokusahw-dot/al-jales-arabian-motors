@@ -3,6 +3,7 @@ import type { MarketCode } from "@/lib/types";
 export type MarketConfig = {
   code: MarketCode;
   slug: "korea" | "saudi" | "yemen";
+  path: "/cars/korea" | "/cars/saudi" | "/cars/yemen";
   nameAr: string;
   roleAr: string;
   titleAr: string;
@@ -14,6 +15,7 @@ export const MARKETS: Record<MarketCode, MarketConfig> = {
   KR: {
     code: "KR",
     slug: "korea",
+    path: "/cars/korea",
     nameAr: "كوريا",
     roleAr: "مصادر واستيراد",
     titleAr: "سيارات من كوريا",
@@ -24,6 +26,7 @@ export const MARKETS: Record<MarketCode, MarketConfig> = {
   SA: {
     code: "SA",
     slug: "saudi",
+    path: "/cars/saudi",
     nameAr: "السعودية",
     roleAr: "معرض محلي",
     titleAr: "سيارات معرض السعودية",
@@ -33,6 +36,7 @@ export const MARKETS: Record<MarketCode, MarketConfig> = {
   YE: {
     code: "YE",
     slug: "yemen",
+    path: "/cars/yemen",
     nameAr: "اليمن",
     roleAr: "معرض محلي",
     titleAr: "سيارات معرض اليمن",

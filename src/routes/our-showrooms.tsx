@@ -26,7 +26,7 @@ function Page() {
             const available = list.filter((v) => v.status === "available").length;
             return (
               <li key={m}>
-                <Link to="/cars/$slug" params={{ slug: cfg.slug }} className="group flex h-full flex-col gap-6 rounded-lg bg-card p-7 shadow-card transition-shadow hover:shadow-lift">
+                <Link to={cfg.path} className="group flex h-full flex-col gap-6 rounded-lg bg-card p-7 shadow-card transition-shadow hover:shadow-lift">
                   <div className="flex items-center justify-between">
                     <span className="ltr-iso font-display text-5xl font-bold text-muted-foreground/30">{m}</span>
                     <span className="eyebrow">{cfg.roleAr}</span>

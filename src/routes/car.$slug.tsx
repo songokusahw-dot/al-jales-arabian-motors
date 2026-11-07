@@ -53,7 +53,7 @@ function VehiclePage() {
         <nav aria-label="مسار التنقل" className="mb-6 flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
           <Link to="/" className="hover:text-foreground">الرئيسية</Link>
           <span aria-hidden>/</span>
-          <Link to="/cars/$slug" params={{ slug: MARKETS[v.market].slug }} className="hover:text-foreground">
+          <Link to={MARKETS[v.market].path} className="hover:text-foreground">
             {MARKETS[v.market].titleAr}
           </Link>
           <span aria-hidden>/</span>
