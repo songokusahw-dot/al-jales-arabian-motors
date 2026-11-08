@@ -35,6 +35,11 @@ export function Gallery({ images, title, referenceCode }: { images: Img[]; title
   const realCount = images.filter(isReal).length;
   const hasIllustrative = images.some((i) => isReal(i) && i.isIllustrative);
 
+  const returnFocus = useRef<HTMLElement | null>(null);
+  const openLightbox = (i: number) => {
+    returnFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setLightbox(i);
+  };
   const onLightbox = (i: number | null) => {
     if (i === null && lightbox !== null) setActive(lightbox);
     setLightbox(i);
@@ -84,7 +89,7 @@ export function Gallery({ images, title, referenceCode }: { images: Img[]; title
       </div>
 
       {mode === "gallery" && (
-        <StageCarousel images={images} active={active} onSelect={setActive} onOpen={setLightbox} title={title} referenceCode={referenceCode} />
+        <StageCarousel images={images} active={active} onSelect={setActive} onOpen={openLightbox} title={title} referenceCode={referenceCode} />
       )}
 
       {mode === "grid" && (
@@ -93,7 +98,7 @@ export function Gallery({ images, title, referenceCode }: { images: Img[]; title
             <button
               key={i}
               type="button"
-              onClick={() => setLightbox(i)}
+              onClick={() => openLightbox(i)}
               aria-label={`عرض الصورة ${i + 1} بملء الشاشة`}
               className={cn(
                 "group relative cursor-zoom-in overflow-hidden rounded-lg bg-background/60 transition-shadow hover:shadow-card",
@@ -106,9 +111,9 @@ export function Gallery({ images, title, referenceCode }: { images: Img[]; title
         </div>
       )}
 
-      {mode === "slider" && <Filmstrip images={images} active={active} onSelect={setActive} onOpen={setLightbox} />}
+      {mode === "slider" && <Filmstrip images={images} active={active} onSelect={setActive} onOpen={openLightbox} />}
 
-      <Lightbox images={images} index={lightbox} onIndex={onLightbox} title={title} />
+      <Lightbox images={images} index={lightbox} onIndex={onLightbox} title={title} returnFocus={returnFocus} />
     </section>
   );
 }
@@ -296,7 +301,19 @@ function Filmstrip({ images, active, onSelect, onOpen }: { images: Img[]; active
   );
 }
 
-function Lightbox({ images, index, onIndex, title }: { images: Img[]; index: number | null; onIndex: (i: number | null) => void; title: string }) {
+function Lightbox({
+  images,
+  index,
+  onIndex,
+  title,
+  returnFocus,
+}: {
+  images: Img[];
+  index: number | null;
+  onIndex: (i: number | null) => void;
+  title: string;
+  returnFocus: React.RefObject<HTMLElement | null>;
+}) {
   const touchX = useRef<number | null>(null);
   const isOpen = index !== null;
   const i = index ?? 0;
@@ -309,6 +326,14 @@ function Lightbox({ images, index, onIndex, title }: { images: Img[]; index: num
     <Dialog open={isOpen} onOpenChange={(o) => !o && onIndex(null)}>
       <DialogContent
         className="h-[100dvh] max-h-none w-screen max-w-none gap-0 rounded-none border-none bg-ink p-0 text-ink-foreground sm:rounded-none [&>button:last-child]:hidden"
+        onCloseAutoFocus={(e) => {
+          // Return focus to the control that opened the lightbox (page position is kept).
+          const el = returnFocus.current;
+          if (el?.isConnected) {
+            e.preventDefault();
+            el.focus({ preventScroll: true });
+          }
+        }}
         onKeyDown={(e) => {
           const step = arrowStep(e);
           if (step === 1) next();
