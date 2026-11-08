@@ -36,7 +36,7 @@ use the editor.
 - Inventory logic (search normalization, filters, sort, pagination, similar cars) lives in `src/lib/inventory.ts`; pricing totals only via `computeTotal()` in `src/lib/pricing.ts` — one source of truth for prices.
 - All listing pages (`/cars`, `/cars/{korea,saudi,yemen}`, `/search`, `/brands/$brandSlug`) render the shared `VehicleListing` with `parseListingSearch` as `validateSearch`; market pages use `MarketListingPage` — avoids three diverging listing implementations.
 - Filter state lives in URL search params (all keys optional); any filter change resets `page` — shareable links and working back/forward.
-- Motion ownership: GSAP/ScrollTrigger only in `ImportJourney` (scroll scene, via `useGSAP` + `matchMedia` for reduced motion); Embla + Auto Scroll only for the brand marquee and gallery slider; CSS for everything else — prevents two engines animating one element.
+- Motion ownership: GSAP/ScrollTrigger only in `ImportJourney` (scroll scene, via `useGSAP` + `matchMedia` for reduced motion); Embla only for the brand marquee (with Auto Scroll) and the vehicle `Gallery` stage/filmstrip (jump instead of animate under reduced motion); CSS (opacity/transform/clip-path only) for everything else — prevents two engines animating one element and layout shift.
 - Theme: `.dark` class on `<html>`, persisted in localStorage and applied by an inline head script before paint — avoids flash and hydration mismatch.
 - Forms are local-only demos (`src/lib/local-store.ts`) and must show the "not sent to the company" notice.
 - Kit reference docs (routes, tokens, data model, QA matrix, phase prompts) are in `docs/al-jales-kit/`.
@@ -53,4 +53,6 @@ use the editor.
 - Never generate vehicle photos; use real/licensed images of the exact vehicle or an honest placeholder. Abstract non-vehicle atmosphere images are allowed.
 - No fake phone/WhatsApp/email/address/coordinates/social accounts; social icons render only with a real URL. No analytics or pixels without authorization. Legal pages are drafts.
 - After each phase: list changed files/routes, dependencies, checks run and results, and remaining placeholders. Test 1440/1024/768/390/360 px, Light/Dark, RTL, keyboard, reduced motion.
-- Homepage sections live in `src/components/site/home/` (one component per section); `routes/index.tsx` only composes them — keeps redesign phases isolated. THE CUT tokens (`--cut-angle`, `--cut-depth`, `surface-stage`, `text-display-xl`, `cut-edge*`) are used selectively, never on every card/button.
+- Homepage sections live in `src/components/site/home/` (one component per section); `routes/index.tsx` only composes them — keeps redesign phases isolated. THE CUT tokens (`--cut-angle`, `--cut-depth`, `--cut-slant`, `surface-stage`, `text-display-xl`/`text-display-md`, `cut-edge*`, `cut-slant`, `stage-code`) are used selectively — one stage + one red cut line per page (home hero, vehicle stage band), never on every card/button.
+- Vehicle facts and prices render through `src/lib/vehicle-specs.ts` (`primarySpecs`/`specGroups`, null fields dropped) and the shared `SpecStrip`/`PriceTag` components — the home hero and vehicle page share one presentation and never show unrecorded fields.
+- Fixed mobile action bars carry `data-sticky-actions`; `styles.css` pads `body` for them below `lg` — the bar never covers page content or the footer.
