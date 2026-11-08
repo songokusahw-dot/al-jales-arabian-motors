@@ -233,7 +233,7 @@ function StageCarousel({
               aria-label={`عرض الصورة ${i + 1}`}
               aria-current={i === active ? "true" : undefined}
               className={cn(
-                "relative aspect-[4/3] w-20 shrink-0 cursor-pointer overflow-hidden rounded-md bg-background/70 ring-offset-2 ring-offset-surface-stage transition-[opacity,box-shadow] duration-300 sm:w-24 md:w-28",
+                "relative aspect-[4/3] w-[4.25rem] shrink-0 cursor-pointer overflow-hidden rounded-md bg-background/70 ring-offset-2 ring-offset-surface-stage transition-[opacity,box-shadow] duration-300 sm:w-24 md:w-28",
                 i === active ? "ring-2 ring-primary" : "opacity-70 hover:opacity-100",
               )}
             >
