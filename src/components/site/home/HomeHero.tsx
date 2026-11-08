@@ -24,13 +24,13 @@ export function HomeHero() {
   return (
     <section aria-labelledby="hero-title" className="relative isolate overflow-hidden pt-14 md:pt-16">
       {/* THE CUT — desktop stage panel with a slanted inner edge and a thin red edge line */}
-      <div aria-hidden className="cut-reveal pointer-events-none absolute bottom-0 end-0 top-16 -z-10 hidden w-[46%] lg:block">
+      <div aria-hidden className="cut-reveal pointer-events-none absolute bottom-0 end-0 top-16 -z-10 hidden w-[48%] xl:block">
         <div className="cut-slant absolute inset-0 bg-primary" />
         <div className="cut-slant absolute inset-y-0 start-[4px] end-0 bg-surface-stage" />
       </div>
 
-      <div className="container-site grid gap-y-8 pt-7 md:pt-12 lg:min-h-[min(86svh,50rem)] lg:grid-cols-12 lg:items-center lg:gap-x-8 lg:py-16">
-        <div className="lg:col-span-7 lg:pe-10">
+      <div className="container-site grid gap-y-8 pt-7 md:pt-12 xl:min-h-[min(86svh,50rem)] xl:grid-cols-12 xl:items-center xl:gap-x-8 xl:py-16">
+        <div className="xl:col-span-7 xl:pe-10">
           <p className="eyebrow reveal-up">AL-JALES AUTOMOTIVE · كوريا · السعودية · اليمن</p>
           <h1 id="hero-title" className="mt-4 text-display-xl font-bold">
             <span className="reveal-up block [animation-delay:80ms]">سيارتك القادمة،</span>
@@ -74,22 +74,24 @@ function HeroStage({ v }: { v: Vehicle }) {
   const title = `${v.brandAr} ${v.modelAr}`;
   const facts = primarySpecs(v).filter((s) => s.key === "mileage" || s.key === "fuel" || s.key === "transmission");
   return (
-    <div className="relative -mx-5 px-5 pb-12 pt-12 md:-mx-8 md:px-8 md:pt-20 lg:col-span-5 lg:mx-0 lg:px-0 lg:py-0">
+    <div className="relative -mx-5 px-5 pb-12 pt-12 md:-mx-8 md:px-8 md:pb-14 md:pt-20 xl:col-span-5 xl:mx-0 xl:px-0 xl:py-0">
       {/* Mobile/tablet: the same cut becomes a diagonal top edge */}
-      <div aria-hidden className="absolute inset-0 -z-10 lg:hidden">
+      <div aria-hidden className="absolute inset-0 -z-10 xl:hidden">
         <div className="cut-edge-top absolute inset-0 bg-primary" />
         <div className="cut-edge-top absolute inset-x-0 bottom-0 top-[5px] bg-surface-stage" />
       </div>
 
-      <figure className="@container relative">
-        <span aria-hidden className="stage-code fade-soft absolute inset-x-0 top-[22%] text-center [animation-delay:500ms]">
-          {v.referenceCode}
-        </span>
-        <div className="stage-in relative mx-auto aspect-[16/9] max-w-xl">
-          <VehicleImage image={v.gallery[0]} eager fit="contain" className="bg-transparent" sizes="(min-width: 1024px) 40vw, 100vw" />
+      <figure className="relative md:grid md:grid-cols-2 md:items-center md:gap-8 xl:block">
+        <div className="@container relative">
+          <span aria-hidden className="stage-code fade-soft absolute inset-x-0 top-1/2 -translate-y-1/2 text-center [animation-delay:500ms]">
+            {v.referenceCode}
+          </span>
+          <div className="stage-in relative mx-auto aspect-[16/9] max-w-xl">
+            <VehicleImage image={v.gallery[0]} eager fit="contain" className="bg-transparent" sizes="(min-width: 1280px) 40vw, (min-width: 768px) 50vw, 100vw" />
+          </div>
         </div>
 
-        <figcaption className="reveal-up relative mx-auto -mt-4 max-w-xl rounded-lg bg-card p-5 shadow-lift [animation-delay:550ms]">
+        <figcaption className="reveal-up relative mx-auto -mt-2 w-full max-w-xl md:mt-0 xl:-mt-4 rounded-lg bg-card p-5 shadow-lift [animation-delay:550ms]">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="eyebrow">سيارة مختارة</p>
             <div className="flex flex-wrap items-center gap-1.5">

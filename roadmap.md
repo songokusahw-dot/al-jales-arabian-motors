@@ -7,4 +7,5 @@
 
 ## Redesign "THE CUT"
 - [x] Phase A: tokens/utility, VehicleImage hardening, homepage section split (no visual change)
-- [ ] Phase B+ — waiting for user review of Phase A
+- [x] Phase B+C: cinematic homepage hero (featured car on stage), thinner header, premium vehicle page (stage gallery, specs bar, tabs, inquiry, mobile bar)
+- [ ] Phase D — waiting for user review of Phase B+C
