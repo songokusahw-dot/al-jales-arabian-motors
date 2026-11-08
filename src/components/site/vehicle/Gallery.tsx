@@ -359,7 +359,7 @@ function Lightbox({
             </button>
           </div>
           <div className="relative flex min-h-0 flex-1 items-center justify-center px-4 md:px-20">
-            <div key={i} className="fade-soft h-full max-h-[78vh] w-full max-w-5xl overflow-hidden rounded-lg">
+            <div key={i} className="fade-soft aspect-[4/3] max-h-full w-full max-w-5xl overflow-hidden rounded-lg sm:aspect-[16/10]">
               <VehicleImage image={images[i]} fit="contain" />
             </div>
             {n > 1 && (
