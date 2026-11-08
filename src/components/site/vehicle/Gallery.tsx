@@ -320,7 +320,7 @@ function Lightbox({
   const n = images.length;
   const next = () => onIndex((i + 1) % n);
   const prev = () => onIndex((i - 1 + n) % n);
-  const NAV = "flex size-11 cursor-pointer items-center justify-center rounded-full bg-ink-foreground/10 transition-colors hover:bg-ink-foreground/20 active:scale-95";
+  const NAV = "flex size-11 cursor-pointer items-center justify-center rounded-full bg-ink/75 text-ink-foreground ring-1 ring-ink-foreground/25 backdrop-blur transition-colors hover:bg-ink active:scale-95";
 
   return (
     <Dialog open={isOpen} onOpenChange={(o) => !o && onIndex(null)}>
